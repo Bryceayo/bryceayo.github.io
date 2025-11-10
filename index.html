@@ -68,6 +68,7 @@
     .rank.r4 .dot{background:var(--gold); box-shadow:0 0 10px var(--gold)}
     .rank.r5 .dot{background:var(--purple); box-shadow:0 0 10px var(--purple)}
     .rank.r6 .dot{background:#68e8ff; box-shadow:0 0 10px #68e8ff}
+    .rank.r7 .dot{background:#ff87c5; box-shadow:0 0 10px #ff87c5}
 
     h2{margin:8px 0 8px; font-size:18px; font-weight:800; text-align:center}
     .art{display:flex; align-items:center; justify-content:center; width:100%; max-width:520px; background:rgba(0,0,0,.35); border:1px solid rgba(255,255,255,.06); border-radius:14px; padding:12px; min-height:200px}
@@ -99,6 +100,14 @@
     .hint{position:fixed; bottom:14px; left:50%; transform:translateX(-50%); background:rgba(0,0,0,.55); border:1px solid var(--stroke); padding:8px 12px; border-radius:999px; font-size:12px; color:#dfe6ef; box-shadow:0 6px 22px rgba(0,0,0,.35)}
 
     @media (prefers-reduced-motion: reduce){ .sparkle,.snow,.bgfloat{display:none} .inner{transition:none} }
+      /* Modal */
+    .modal{position:fixed; inset:0; display:none; place-items:center; background:rgba(0,0,0,.55); backdrop-filter:saturate(110%) blur(6px); z-index:50}
+    .modal.open{display:grid}
+    .sheet{width:min(540px,92vw); background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04)); border:1px solid var(--stroke); border-radius:16px; box-shadow:var(--shadow); padding:16px}
+    .sheet h3{margin:0 0 10px; font-size:18px}
+    .row{display:flex; gap:10px; flex-wrap:wrap}
+    .sheet .btn{flex:1 1 180px; text-align:center}
+    .sheet .close{margin-top:10px; display:block; width:100%}
   </style>
 </head>
 <body>
@@ -205,16 +214,16 @@
         </div>
       </section>
 
-      <!-- 5. Webcam ($129) -->
-      <section class="card" data-type="link" data-link="https://a.co/d/e9CLvcx" data-title="Webcam">
+      <!-- 5. Amazon item ($129) -->
+      <section class="card" data-type="link" data-link="https://a.co/d/e9CLvcx" data-title="Amazon item">
         <div class="inner">
           <div class="face front">
             <div class="rank r5"><span class="dot"></span>#5</div>
-            <h2>Webcam</h2>
-            <div class="art"><img src="https://cdn.shopify.com/s/files/1/0054/9466/9382/files/c606a6b460f944b4a834.webp?v=1725464276" alt="Webcam image"></div>
+            <h2>Amazon item</h2>
+            <div class="art"><img src="https://cdn.shopify.com/s/files/1/0054/9466/9382/files/c606a6b460f944b4a834.webp?v=1725464276" alt="Amazon item image"></div>
           </div>
           <div class="face back">
-            <h2>Webcam</h2>
+            <h2>Amazon item</h2>
             <div class="meta"><div class="price">$129.00</div></div>
             <div class="cta">
               <a class="btn" href="https://a.co/d/e9CLvcx" target="_blank" rel="noopener">Open product link</a>
@@ -242,10 +251,42 @@
           </div>
         </div>
       </section>
-
+      
+      <!-- 7. Alani Nu Energy Drink Variety Pack (18-ct) -->
+      <section class="card" data-type="multi" data-title="Alani Nu Energy Drink, Variety Pack, 18-count">
+        <div class="inner">
+          <div class="face front">
+            <div class="rank r7"><span class="dot"></span>#7</div>
+            <h2>Alani Nu Energy Drink (18‑ct)</h2>
+            <div class="art"><img src="https://bfasset.costco-static.com/U447IH35/as/xfv98tr9k7gxpz7x3s24kkm/1942590__2?auto=webp&amp;format=jpg&amp;width=600&amp;height=600&amp;fit=bounds&amp;canvas=600,600" alt="Alani Nu Energy Drink Variety Pack 18 count"></div>
+          </div>
+          <div class="face back">
+            <h2>Alani Nu Energy Drink (18‑ct)</h2>
+            <div class="meta"><div class="price">$27.00</div></div>
+            <div class="cta">
+              <button class="btn" data-open-retailer>Choose store</button>
+              <a class="btn" href="https://www.costco.com/p/-/alani-nu-energy-drink-variety-pack-12-fl-oz-18-count/4000269836?langId=-1" target="_blank" rel="noopener">Open Costco</a>
+              <a class="btn" href="https://www.samsclub.com/ip/alani-nu-energy-drink-variety-pack-12-fl-oz-18pk/15230853923?itemNumber=990386544" target="_blank" rel="noopener">Open Sam’s Club</a>
+              <button class="btn" data-flip-back>Flip back</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    
     </main>
 
     <footer>Tap to flip • No tracking • Built for GitHub Pages</footer>
+  </div>
+
+  <div class="modal" id="retailerModal" role="dialog" aria-modal="true" aria-label="Choose store">
+    <div class="sheet">
+      <h3>Choose retailer</h3>
+      <div class="row">
+        <a class="btn" href="https://www.costco.com/p/-/alani-nu-energy-drink-variety-pack-12-fl-oz-18-count/4000269836?langId=-1" target="_blank" rel="noopener">Costco</a>
+        <a class="btn" href="https://www.samsclub.com/ip/alani-nu-energy-drink-variety-pack-12-fl-oz-18pk/15230853923?itemNumber=990386544" target="_blank" rel="noopener">Sam’s Club</a>
+      </div>
+      <button class="btn close" data-close-modal>Close</button>
+    </div>
   </div>
 
   <div class="hint" id="hint">Tip: tap a card to flip</div>
@@ -316,6 +357,15 @@
       monImg.onerror = tryNext; // if first src fails, try next
       // kick off if initial src missing
       if(!monImg.complete || monImg.naturalWidth === 0) tryNext();
+    });
+
+    // Retailer modal controls
+    const retailerModal = document.getElementById('retailerModal');
+    document.addEventListener('click', (e)=>{
+      const openBtn = e.target.closest('[data-open-retailer]');
+      const closeBtn = e.target.closest('[data-close-modal]');
+      if(openBtn){ retailerModal.classList.add('open'); }
+      if(closeBtn || (e.target === retailerModal)){ retailerModal.classList.remove('open'); }
     });
 
     // Hide tap hint
