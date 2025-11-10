@@ -8,8 +8,9 @@
   <style>
     :root{
       --bg:#07090c; --bg2:#0c0f15; --text:#eef1f5; --muted:#a7b0bd;
-      --red:#ff3355; --green:#15e18c; --gold:#ffd463; --stroke:rgba(255,255,255,.12);
-      --shadow:0 18px 40px rgba(0,0,0,.45); --radius:20px; --maxw:980px;
+      --red:#ff3355; --green:#15e18c; --gold:#ffd463; --blue:#7aa6ff; --purple:#b07bff;
+      --stroke:rgba(255,255,255,.12); --shadow:0 18px 40px rgba(0,0,0,.45);
+      --radius:20px; --maxw:980px;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -63,8 +64,10 @@
     .rank{position:absolute; top:12px; left:12px; font-weight:800; font-size:14px; background:rgba(0,0,0,.55); border:1px solid rgba(255,255,255,.2); padding:6px 10px; border-radius:999px; letter-spacing:.4px}
     .rank .dot{display:inline-block; width:6px; height:6px; border-radius:50%; margin-right:8px; background:var(--red); box-shadow:0 0 10px var(--red)}
     .rank.r2 .dot{background:var(--green); box-shadow:0 0 10px var(--green)}
-    .rank.r3 .dot{background:#7aa6ff; box-shadow:0 0 10px #7aa6ff}
+    .rank.r3 .dot{background:var(--blue); box-shadow:0 0 10px var(--blue)}
     .rank.r4 .dot{background:var(--gold); box-shadow:0 0 10px var(--gold)}
+    .rank.r5 .dot{background:var(--purple); box-shadow:0 0 10px var(--purple)}
+    .rank.r6 .dot{background:#68e8ff; box-shadow:0 0 10px #68e8ff}
 
     h2{margin:8px 0 8px; font-size:18px; font-weight:800; text-align:center}
     .art{display:flex; align-items:center; justify-content:center; width:100%; max-width:520px; background:rgba(0,0,0,.35); border:1px solid rgba(255,255,255,.06); border-radius:14px; padding:12px; min-height:200px}
@@ -188,7 +191,7 @@
             <div class="rank r4"><span class="dot"></span>#4</div>
             <h2>27&quot; 4K 144Hz Monitor</h2>
             <div class="art">
-              <img id="monImg" alt="27 inch 4K 144Hz monitor">
+              <img id="monImg" src="monitor.png" alt="27-inch 4K 144Hz monitor">
             </div>
           </div>
           <div class="face back">
@@ -200,17 +203,18 @@
             </div>
           </div>
         </div>
-      </section>      
-      <!-- 5. Amazon item ($129) -->
-      <section class="card" data-type="link" data-link="https://a.co/d/e9CLvcx" data-title="Amazon item">
+      </section>
+
+      <!-- 5. Webcam ($129) -->
+      <section class="card" data-type="link" data-link="https://a.co/d/e9CLvcx" data-title="Webcam">
         <div class="inner">
           <div class="face front">
             <div class="rank r5"><span class="dot"></span>#5</div>
-            <h2>Amazon item</h2>
-            <div class="art"><img src="https://cdn.shopify.com/s/files/1/0054/9466/9382/files/c606a6b460f944b4a834.webp?v=1725464276" alt="Amazon item image"></div>
+            <h2>Webcam</h2>
+            <div class="art"><img src="https://cdn.shopify.com/s/files/1/0054/9466/9382/files/c606a6b460f944b4a834.webp?v=1725464276" alt="Webcam image"></div>
           </div>
           <div class="face back">
-            <h2>Amazon item</h2>
+            <h2>Webcam</h2>
             <div class="meta"><div class="price">$129.00</div></div>
             <div class="cta">
               <a class="btn" href="https://a.co/d/e9CLvcx" target="_blank" rel="noopener">Open product link</a>
@@ -238,7 +242,7 @@
           </div>
         </div>
       </section>
-    
+
     </main>
 
     <footer>Tap to flip • No tracking • Built for GitHub Pages</footer>
@@ -291,31 +295,32 @@
     function toggleSparkle(){ document.querySelector('.sparkle').style.display = sparkleToggle.checked ? 'block' : 'none'; }
     sparkleToggle.addEventListener('change', toggleSparkle); toggleSparkle();
 
-    // Hide tap hint
-    const hint = document.getElementById('hint');
-    function hideHint(){ if(hint){ hint.style.opacity='0'; setTimeout(()=>hint.remove(), 500); } }
-      // Robust monitor image fallback chain (local > Drive usercontent > Drive uc view)
+    // Monitor image robust fallback chain
     document.addEventListener('DOMContentLoaded', ()=>{
       const monImg = document.getElementById('monImg');
       if(!monImg) return;
       const fallbacks = [
-        'img/monitor.png',
+        'monitor.png',
+        'image-removebg-preview (2).png',
         'https://drive.usercontent.google.com/download?id=1-5q_5AooVbw8z6GWjUiigRhp6NYgEz9Z',
         'https://drive.google.com/uc?export=view&id=1-5q_5AooVbw8z6GWjUiigRhp6NYgEz9Z'
       ];
       let i = 0;
       const tryNext = ()=>{
         if(i >= fallbacks.length){
-          const ph = document.createElement('div');
-          ph.className = 'ph';
-          ph.textContent = 'Image unavailable';
-          monImg.replaceWith(ph);
-          return;
+          const ph = document.createElement('div'); ph.className = 'ph'; ph.textContent = 'Image unavailable';
+          monImg.replaceWith(ph); return;
         }
         monImg.src = fallbacks[i++];
       };
-      monImg.onerror = tryNext; tryNext();
+      monImg.onerror = tryNext; // if first src fails, try next
+      // kick off if initial src missing
+      if(!monImg.complete || monImg.naturalWidth === 0) tryNext();
     });
+
+    // Hide tap hint
+    const hint = document.getElementById('hint');
+    function hideHint(){ if(hint){ hint.style.opacity='0'; setTimeout(()=>hint.remove(), 500); } }
   </script>
   <noscript>This page uses a little JavaScript for the flip effect and snow. Enable JS if you want the animations.</noscript>
 </body>
