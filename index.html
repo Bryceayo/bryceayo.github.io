@@ -4,140 +4,205 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Jett’s Christmas List 2025</title>
+  <meta name="description" content="A festive, mobile‑first wish list with interactive flip cards." />
   <style>
     :root{
-      --bg:#0b0c0f;
-      --bg2:#0f1116;
-      --glass:rgba(255,255,255,.07);
+      --bg:#07090c;
+      --bg2:#0c0f15;
+      --text:#eef1f5;
+      --muted:#a7b0bd;
+      --red:#ff3355;
+      --green:#15e18c;
+      --gold:#ffd463;
+      --glass:rgba(255,255,255,.06);
       --stroke:rgba(255,255,255,.12);
-      --text:#e8eaed;
-      --muted:#a9b0bb;
-      --accent:#ff2a4a; /* neon red */
-      --accent-2:#1bd97b; /* minty green */
-      --shadow:0 10px 30px rgba(0,0,0,.45);
-      --page-w:816px; /* ~US Letter width at 96dpi */
-      --page-h:1056px;/* ~US Letter height at 96dpi */
+      --shadow:0 18px 40px rgba(0,0,0,.45);
+      --radius:20px;
+      --maxw:980px;
     }
     *{box-sizing:border-box}
-    html,body{height:100%; background:radial-gradient(1200px 1200px at 80% -10%, #11161f 0%, var(--bg) 40%, #07080a 100%);}
-    body{margin:0; color:var(--text); font:16px/1.5 Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;}
+    html,body{height:100%}
+    body{margin:0; font:16px/1.45 Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; color:var(--text); background:
+      radial-gradient(1200px 800px at 100% -10%, rgba(255,51,85,.1), transparent 40%),
+      radial-gradient(1000px 700px at 0% 110%, rgba(21,225,140,.08), transparent 40%),
+      linear-gradient(180deg, var(--bg2), var(--bg));}
 
-    .page{width:var(--page-w); min-height:var(--page-h); margin:24px auto; padding:36px; position:relative; border-radius:24px; background:linear-gradient(145deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); box-shadow:var(--shadow), inset 0 1px 0 rgba(255,255,255,.06); overflow:hidden}
+    .wrap{max-width:var(--maxw); margin:auto; padding:20px 16px 40px; position:relative}
 
-    /* Subtle festive glow borders */
-    .page:before,.page:after{content:""; position:absolute; inset:-2px; border-radius:26px; pointer-events:none}
-    .page:before{background:conic-gradient(from 20deg, transparent 0 20%, rgba(255,42,74,.35) 20% 30%, transparent 30% 55%, rgba(27,217,123,.35) 55% 65%, transparent 65% 100%); filter:blur(16px); opacity:.6}
-    .page:after{border:1px solid var(--stroke)}
+    header{display:flex; align-items:center; justify-content:space-between; gap:12px; margin:8px 0 18px}
+    h1{margin:0; font-weight:900; letter-spacing:.3px; font-size:clamp(22px,3.4vw,36px);
+      background:conic-gradient(from 10deg, #fff, var(--gold), #fff); -webkit-background-clip:text; background-clip:text; color:transparent;
+      text-shadow:0 0 22px rgba(255,212,99,.35), 0 0 38px rgba(255,51,85,.25)}
+    .sub{color:var(--muted); font-size:13px}
 
-    header{display:flex; justify-content:space-between; align-items:center; gap:16px; margin-bottom:20px}
-    h1{margin:0; font-weight:800; letter-spacing:.3px; font-size:32px; text-shadow:0 0 18px rgba(255,42,74,.6), 0 0 28px rgba(27,217,123,.35)}
-    .sub{color:var(--muted); font-size:14px}
+    .controls{display:flex; gap:10px; align-items:center}
+    .pill{display:inline-flex; align-items:center; gap:8px; border:1px solid var(--stroke); background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)); padding:8px 12px; border-radius:999px; box-shadow:0 2px 10px rgba(0,0,0,.25)}
+    .toggle{appearance:none; width:30px; height:18px; border-radius:999px; position:relative; border:1px solid var(--stroke); background:#0e1218; cursor:pointer}
+    .toggle:before{content:""; position:absolute; inset:2px auto 2px 2px; width:14px; border-radius:50%; background:#8892a6; transition:transform .2s ease}
+    .toggle:checked{background:linear-gradient(90deg, var(--red), var(--green))}
+    .toggle:checked:before{transform:translateX(12px); background:#fff}
 
-    .actions{display:flex; gap:10px}
-    .btn{appearance:none; border:1px solid var(--stroke); background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)); color:var(--text); padding:10px 14px; border-radius:12px; cursor:pointer; backdrop-filter:blur(6px); box-shadow:0 2px 10px rgba(0,0,0,.25)}
-    .btn:hover{border-color:rgba(255,255,255,.22)}
+    /* Grid */
+    .grid{display:grid; gap:14px}
+    @media(min-width:720px){.grid{grid-template-columns:repeat(3,1fr)}}
 
-    /* Grid layout: 1 spans top, 2&3 side-by-side, 4 spans bottom */
-    .grid{display:grid; gap:16px; grid-template-columns:1fr 1fr; grid-template-areas:
-      "a a"
-      "b c";
-    }
-    .card{position:relative; border:1px solid var(--stroke); background:linear-gradient(145deg, rgba(255,255,255,.05), rgba(255,255,255,.02)); border-radius:20px; padding:18px; overflow:hidden; box-shadow:var(--shadow)}
-    .card h2{margin:0; font-size:18px; font-weight:700}
-    .art{position:relative; display:flex; align-items:center; justify-content:center; margin:8px 0 0; background:rgba(0,0,0,.35); border-radius:14px; min-height:220px; border:1px solid rgba(255,255,255,.06)}
-    .art img{max-width:100%; max-height:280px; object-fit:contain; display:block;}
+    .card{position:relative; perspective:1200px}
+    .inner{position:relative; border:1px solid var(--stroke); border-radius:var(--radius); background:linear-gradient(145deg, rgba(255,255,255,.06), rgba(255,255,255,.03)); box-shadow:var(--shadow); transform-style:preserve-3d; transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+    .card.flipped .inner{transform:rotateY(180deg)}
 
-    .rank{position:absolute; top:12px; left:12px; font-weight:800; font-size:14px; background:rgba(0,0,0,.6); border:1px solid rgba(255,255,255,.2); color:#fff; padding:6px 10px; border-radius:999px; letter-spacing:.4px}
-    .rank .dot{display:inline-block; width:6px; height:6px; border-radius:50%; margin-right:8px; background:var(--accent); box-shadow:0 0 12px var(--accent)}
-    .rank.r2 .dot{background:var(--accent-2); box-shadow:0 0 12px var(--accent-2)}
-    .rank.r3 .dot{background:#7aa6ff; box-shadow:0 0 12px #7aa6ff}
-    .rank.r4 .dot{background:#ffd45a; box-shadow:0 0 12px #ffd45a}
+    .face{position:relative; min-height:320px; padding:16px; border-radius:var(--radius); display:flex; flex-direction:column; align-items:center; justify-content:center; backface-visibility:hidden}
+    .front{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02))}
+    .back{position:absolute; inset:0; transform:rotateY(180deg); background:linear-gradient(180deg, rgba(0,0,0,.3), rgba(255,255,255,.04))}
 
-    .a{grid-area:a}
-    .b{grid-area:b}
-    .c{grid-area:c}
-    .d{grid-area:d}
+    .rank{position:absolute; top:12px; left:12px; font-weight:800; font-size:14px; background:rgba(0,0,0,.55); border:1px solid rgba(255,255,255,.2); padding:6px 10px; border-radius:999px; letter-spacing:.4px}
+    .rank .dot{display:inline-block; width:6px; height:6px; border-radius:50%; margin-right:8px; background:var(--red); box-shadow:0 0 10px var(--red)}
+    .rank.r2 .dot{background:var(--green); box-shadow:0 0 10px var(--green)}
+    .rank.r3 .dot{background:#7aa6ff; box-shadow:0 0 10px #7aa6ff}
 
-    /* Make the top item taller for emphasis */
-    .a .art{min-height:320px}
+    h2{margin:8px 0 8px; font-size:18px; font-weight:800; text-align:center}
+    .art{display:flex; align-items:center; justify-content:center; width:100%; max-width:520px; background:rgba(0,0,0,.35); border:1px solid rgba(255,255,255,.06); border-radius:14px; padding:12px; min-height:200px}
+    .art img{max-width:100%; max-height:260px; object-fit:contain; filter:drop-shadow(0 20px 24px rgba(0,0,0,.4))}
 
-    /* Snow sparkle */
-    .snow{position:absolute; inset:0; pointer-events:none; overflow:hidden}
-    .flake{position:absolute; top:-20px; width:3px; height:3px; background:radial-gradient(circle, #fff 0 40%, transparent 41%); border-radius:50%; opacity:.85; filter:drop-shadow(0 0 6px rgba(255,255,255,.7)); animation:fall linear infinite}
-    @keyframes fall{ to{ transform:translateY(calc(var(--page-h) + 60px)) translateX(var(--drift)); opacity:.95 } }
+    .back .cta{display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:10px}
+    .btn{appearance:none; border:1px solid var(--stroke); color:#fff; background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04)); padding:10px 14px; border-radius:12px; cursor:pointer; text-decoration:none; font-weight:700}
+    .btn:hover{border-color:rgba(255,255,255,.2)}
+    .soon{font-weight:800; font-size:16px; color:var(--gold); text-shadow:0 0 12px rgba(255,212,99,.5)}
 
-    footer{margin-top:16px; text-align:center; color:var(--muted); font-size:12px}
+    /* Sparkle cursor */
+    .sparkle{position:fixed; inset:0; pointer-events:none; background:radial-gradient(400px 400px at var(--x,50%) var(--y,50%), rgba(255,212,99,.12), transparent 40%), radial-gradient(600px 600px at calc(var(--x,50%)+80px) calc(var(--y,50%)+40px), rgba(255,51,85,.08), transparent 45%)}
 
-    /* Print styles */
-    @media print{
-      body{background:#000}
-      .page{margin:0; box-shadow:none}
-      .actions,.snow{display:none!important}
-      .page{break-inside:avoid}
+    /* Snow layer */
+    .snow{position:fixed; inset:0; pointer-events:none; overflow:hidden}
+    .flake{position:absolute; top:-10px; width:3px; height:3px; background:radial-gradient(circle, #fff 0 40%, transparent 41%); border-radius:50%; opacity:.9; filter:drop-shadow(0 0 6px rgba(255,255,255,.7)); animation:fall linear infinite}
+    @keyframes fall{to{transform:translateY(110vh) translateX(var(--drift));}}
+
+    /* Footer */
+    footer{margin:18px 0 0; text-align:center; color:var(--muted); font-size:12px}
+
+    /* Mobile tap hint */
+    .hint{position:fixed; bottom:14px; left:50%; transform:translateX(-50%); background:rgba(0,0,0,.55); border:1px solid var(--stroke); padding:8px 12px; border-radius:999px; font-size:12px; color:#dfe6ef; box-shadow:0 6px 22px rgba(0,0,0,.35)}
+
+    @media (prefers-reduced-motion: reduce){
+      .sparkle{display:none}
+      .snow{display:none}
+      .inner{transition:none}
     }
   </style>
 </head>
 <body>
-  <div class="page" role="document" aria-label="Jett’s Christmas List 2025">
-    <div class="snow" aria-hidden="true" id="snow"></div>
+  <div class="sparkle" aria-hidden="true"></div>
+  <div class="snow" id="snow" aria-hidden="true"></div>
+
+  <div class="wrap" role="document" aria-label="Jett’s Christmas List 2025">
     <header>
       <div>
         <h1>Jett’s Christmas List 2025</h1>
-        <div class="sub">Ranked by priority • names only</div>
+        <div class="sub">Tap a card to flip • Mobile first</div>
       </div>
-      <div class="actions">
-        <button class="btn" onclick="window.print()" aria-label="Save as PDF">Save as PDF</button>
+      <div class="controls">
+        <label class="pill" title="Toggle snow">
+          <input type="checkbox" class="toggle" id="snowToggle" checked>
+          <span>Snow</span>
+        </label>
+        <label class="pill" title="Toggle sparkle">
+          <input type="checkbox" class="toggle" id="sparkleToggle" checked>
+          <span>Glow</span>
+        </label>
+        <label class="pill" title="Toggle chime">
+          <input type="checkbox" class="toggle" id="soundToggle">
+          <span>SFX</span>
+        </label>
       </div>
     </header>
 
-    <section class="grid" aria-label="Wish list items">
+    <main class="grid" aria-label="Wish list items">
       <!-- 1. M5 Max MacBook Pro -->
-      <article class="card a" aria-label="Item 1: M5 Max MacBook Pro">
-        <div class="rank r1"><span class="dot"></span>#1</div>
-        <h2>M5 Max MacBook Pro</h2>
-        <div class="art">
-          <img src="https://static0.pocketlintimages.com/wordpress/wp-content/uploads/2025/10/apple-m5.jpg?w=1200&h=628&fit=crop" alt="M5 Max MacBook Pro" />
+      <section class="card" data-type="soon" data-title="M5 Max MacBook Pro">
+        <div class="inner">
+          <div class="face front">
+            <div class="rank r1"><span class="dot"></span>#1</div>
+            <h2>M5 Max MacBook Pro</h2>
+            <div class="art"><img src="https://static0.pocketlintimages.com/wordpress/wp-content/uploads/2025/10/apple-m5.jpg?w=1200&h=628&fit=crop" alt="M5 Max MacBook Pro"/></div>
+          </div>
+          <div class="face back">
+            <h2>M5 Max MacBook Pro</h2>
+            <div class="soon">Coming soon • early 2026</div>
+            <div class="cta"><button class="btn" data-flip-back>Flip back</button></div>
+          </div>
         </div>
-      </article>
+      </section>
 
       <!-- 2. iPhone 17 Pro Max 512 GB (Orange) -->
-      <article class="card b" aria-label="Item 2: iPhone 17 Pro Max 512 GB (Orange)">
-        <div class="rank r2"><span class="dot"></span>#2</div>
-        <h2>iPhone 17 Pro Max 512&nbsp;GB (Orange)</h2>
-        <div class="art">
-          <img src="https://directunlocks.com/devices/compressed/iphone-17-pro.png?v=6" alt="iPhone 17 Pro Max 512 GB Orange" />
+      <section class="card" data-type="link" data-link="https://www.apple.com/shop/buy-iphone/iphone-17-pro/6.9-inch-display-512gb-cosmic-orange-att" data-title="iPhone 17 Pro Max 512 GB (Orange)">
+        <div class="inner">
+          <div class="face front">
+            <div class="rank r2"><span class="dot"></span>#2</div>
+            <h2>iPhone 17 Pro Max 512&nbsp;GB (Orange)</h2>
+            <div class="art"><img src="https://directunlocks.com/devices/compressed/iphone-17-pro.png?v=6" alt="iPhone 17 Pro Max 512 GB Orange"/></div>
+          </div>
+          <div class="face back">
+            <h2>iPhone 17 Pro Max</h2>
+            <div class="cta">
+              <a class="btn" href="https://www.apple.com/shop/buy-iphone/iphone-17-pro/6.9-inch-display-512gb-cosmic-orange-att" target="_blank" rel="noopener">Open Apple link</a>
+              <button class="btn" data-flip-back>Flip back</button>
+            </div>
+          </div>
         </div>
-      </article>
+      </section>
 
       <!-- 3. AirPods Pro 3 -->
-      <article class="card c" aria-label="Item 3: AirPods Pro 3">
-        <div class="rank r3"><span class="dot"></span>#3</div>
-        <h2>AirPods Pro 3</h2>
-        <div class="art">
-          <img src="https://www.att.com/scmsassets/global/accessories/audio/apple/airpods-pro-3/carousel/4391u-1.png" alt="AirPods Pro 3" />
+      <section class="card" data-type="link" data-link="https://www.apple.com/shop/buy-airpods/airpods-pro-3" data-title="AirPods Pro 3">
+        <div class="inner">
+          <div class="face front">
+            <div class="rank r3"><span class="dot"></span>#3</div>
+            <h2>AirPods Pro 3</h2>
+            <div class="art"><img src="https://www.att.com/scmsassets/global/accessories/audio/apple/airpods-pro-3/carousel/4391u-1.png" alt="AirPods Pro 3"/></div>
+          </div>
+          <div class="face back">
+            <h2>AirPods Pro 3</h2>
+            <div class="cta">
+              <a class="btn" href="https://www.apple.com/shop/buy-airpods/airpods-pro-3" target="_blank" rel="noopener">Open Apple link</a>
+              <button class="btn" data-flip-back>Flip back</button>
+            </div>
+          </div>
         </div>
-      </article>
+      </section>
+    </main>
 
-          </section>
-
-    <footer>
-      Made for PDF export. Images are for reference only.
-    </footer>
+    <footer>Tap to flip • No tracking • Built for GitHub Pages</footer>
   </div>
 
+  <div class="hint" id="hint">Tip: tap a card to flip</div>
+
   <script>
-    // Generate subtle snowfall
-    (function(){
-      const wrap = document.getElementById('snow');
-      const count = 80; // light
-      const W = wrap.clientWidth; const H = wrap.clientHeight;
+    // Sparkle follows cursor/touch
+    const sparkle = document.querySelector('.sparkle');
+    function setSparkle(x, y){
+      sparkle.style.setProperty('--x', x + 'px');
+      sparkle.style.setProperty('--y', y + 'px');
+    }
+    function moveSparkle(e){
+      const x = e.touches ? e.touches[0].clientX : e.clientX;
+      const y = e.touches ? e.touches[0].clientY : e.clientY;
+      setSparkle(x, y);
+    }
+    document.addEventListener('pointermove', moveSparkle, {passive:true});
+    document.addEventListener('touchmove', moveSparkle, {passive:true});
+
+    // Snow generation with light parallax
+    const snowWrap = document.getElementById('snow');
+    const snowToggle = document.getElementById('snowToggle');
+    function makeSnow(){
+      snowWrap.innerHTML = '';
+      const count = 90; // light weight
+      const W = window.innerWidth;
       for(let i=0;i<count;i++){
         const f = document.createElement('span');
         f.className = 'flake';
-        const size = Math.random()*2.2 + 1.2; // 1.2 - 3.4px
+        const size = Math.random()*2.4 + 1.1; // px
         const left = Math.random()*W;
-        const delay = Math.random()*6; // seconds
-        const dur = Math.random()*10 + 9; // 9 - 19s
+        const delay = Math.random()*6; // s
+        const dur = Math.random()*10 + 9; // 9-19s
         const drift = (Math.random()*140 - 70) + 'px';
         f.style.width = size+'px';
         f.style.height = size+'px';
@@ -145,9 +210,63 @@
         f.style.animationDuration = dur+'s';
         f.style.animationDelay = delay+'s';
         f.style.setProperty('--drift', drift);
-        wrap.appendChild(f);
+        snowWrap.appendChild(f);
       }
-    })();
+    }
+    function toggleSnow(){ snowWrap.style.display = snowToggle.checked ? 'block' : 'none'; }
+    makeSnow(); toggleSnow();
+    window.addEventListener('resize', makeSnow);
+    snowToggle.addEventListener('change', toggleSnow);
+
+    // Card flip + optional chime
+    const soundToggle = document.getElementById('soundToggle');
+    let audioCtx = null;
+    function playChime(){
+      if(!soundToggle.checked) return;
+      if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const now = audioCtx.currentTime;
+      const o = audioCtx.createOscillator();
+      const g = audioCtx.createGain();
+      o.type = 'sine';
+      o.frequency.setValueAtTime(880, now);
+      g.gain.setValueAtTime(0.001, now);
+      g.gain.exponentialRampToValueAtTime(0.12, now+0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, now+0.35);
+      o.connect(g).connect(audioCtx.destination);
+      o.start(); o.stop(now+0.36);
+      // second chime
+      const o2 = audioCtx.createOscillator();
+      const g2 = audioCtx.createGain();
+      o2.type = 'sine'; o2.frequency.setValueAtTime(1175, now+0.05);
+      g2.gain.setValueAtTime(0.001, now+0.05);
+      g2.gain.exponentialRampToValueAtTime(0.12, now+0.08);
+      g2.gain.exponentialRampToValueAtTime(0.0001, now+0.42);
+      o2.connect(g2).connect(audioCtx.destination);
+      o2.start(now+0.05); o2.stop(now+0.45);
+    }
+
+    document.querySelectorAll('.card').forEach(card =>{
+      const inner = card.querySelector('.inner');
+      const flipBackBtns = card.querySelectorAll('[data-flip-back]');
+      card.addEventListener('click', e=>{
+        const isLinkBtn = e.target.closest('a');
+        if(isLinkBtn) return; // allow link click
+        card.classList.toggle('flipped');
+        playChime();
+      });
+      flipBackBtns.forEach(b=> b.addEventListener('click', e=>{ e.stopPropagation(); card.classList.remove('flipped'); }));
+    });
+
+    // Glow toggle
+    const sparkleToggle = document.getElementById('sparkleToggle');
+    function toggleSparkle(){ document.querySelector('.sparkle').style.display = sparkleToggle.checked ? 'block' : 'none'; }
+    sparkleToggle.addEventListener('change', toggleSparkle); toggleSparkle();
+
+    // Hide tap hint after first interaction
+    const hint = document.getElementById('hint');
+    const hideHint = ()=>{ if(hint){ hint.style.opacity = '0'; setTimeout(()=> hint.remove(), 500); document.removeEventListener('pointerdown', hideHint, {passive:true}); } };
+    document.addEventListener('pointerdown', hideHint, {passive:true});
   </script>
+  <noscript>This page uses a little JavaScript for the flip effect and snow. Enable JS if you want the animations.</noscript>
 </body>
 </html>
