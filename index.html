@@ -83,24 +83,7 @@
     .btn:hover{border-color:rgba(255,255,255,.2)}
     .soon{font-weight:800; font-size:16px; color:var(--gold); text-shadow:0 0 12px rgba(255,212,99,.5)}
 
-    /* Sparkle cursor */
-    .sparkle{position:fixed; inset:0; pointer-events:none; background:radial-gradient(380px 380px at var(--x,50%) var(--y,50%), rgba(255,212,99,.18), transparent 40%), radial-gradient(520px 520px at calc(var(--x,50%)+80px) calc(var(--y,50%)+40px), rgba(255,51,85,.12), transparent 45%); transition:transform .12s ease}
-
-    /* Snow layer */
-    .snow{position:fixed; inset:0; pointer-events:none; overflow:hidden}
-    .flake{position:absolute; top:-10px; width:3px; height:3px; background:radial-gradient(circle, #fff 0 40%, transparent 41%); border-radius:50%; opacity:.9; filter:drop-shadow(0 0 6px rgba(255,255,255,.7)); animation:fall linear infinite}
-    @keyframes fall{to{transform:translateY(110vh) translateX(var(--drift));}}
-
-    /* Tap burst */
-    .burst{position:fixed; left:0; top:0; pointer-events:none}
-    .burst i{position:absolute; width:4px; height:4px; background:#fff; border-radius:50%; filter:drop-shadow(0 0 6px #fff); animation:pop .6s ease-out forwards}
-    @keyframes pop{to{transform:translate(var(--tx), var(--ty)) scale(.4); opacity:0}}
-
-    footer{margin:18px 0 0; text-align:center; color:var(--muted); font-size:12px}
-    .hint{position:fixed; bottom:14px; left:50%; transform:translateX(-50%); background:rgba(0,0,0,.55); border:1px solid var(--stroke); padding:8px 12px; border-radius:999px; font-size:12px; color:#dfe6ef; box-shadow:0 6px 22px rgba(0,0,0,.35)}
-
-    @media (prefers-reduced-motion: reduce){ .sparkle,.snow,.bgfloat{display:none} .inner{transition:none} }
-      /* Modal */
+    /* Modal */
     .modal{position:fixed; inset:0; display:none; place-items:center; background:rgba(0,0,0,.55); backdrop-filter:saturate(110%) blur(6px); z-index:50}
     .modal.open{display:grid}
     .sheet{width:min(540px,92vw); background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04)); border:1px solid var(--stroke); border-radius:16px; box-shadow:var(--shadow); padding:16px}
@@ -108,6 +91,11 @@
     .row{display:flex; gap:10px; flex-wrap:wrap}
     .sheet .btn{flex:1 1 180px; text-align:center}
     .sheet .close{margin-top:10px; display:block; width:100%}
+
+    footer{margin:18px 0 0; text-align:center; color:var(--muted); font-size:12px}
+    .hint{position:fixed; bottom:14px; left:50%; transform:translateX(-50%); background:rgba(0,0,0,.55); border:1px solid var(--stroke); padding:8px 12px; border-radius:999px; font-size:12px; color:#dfe6ef; box-shadow:0 6px 22px rgba(0,0,0,.35)}
+
+    @media (prefers-reduced-motion: reduce){ .sparkle,.snow,.bgfloat{display:none} .inner{transition:none} }
   </style>
 </head>
 <body>
@@ -150,6 +138,119 @@
           <div class="face back">
             <h2>M5 Max MacBook Pro</h2>
             <div class="soon">Coming soon • early 2026</div>
+            <div class="cta"><button class="btn" data-flip-back>Flip back</button></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. iPhone 17 Pro Max 512 GB (Orange) -->
+      <section class="card" data-type="link" data-link="https://www.apple.com/shop/buy-iphone/iphone-17-pro/6.9-inch-display-512gb-cosmic-orange-att" data-title="iPhone 17 Pro Max 512 GB (Orange)">
+        <div class="inner">
+          <div class="face front">
+            <div class="rank r2"><span class="dot"></span>#2</div>
+            <h2>iPhone 17 Pro Max 512&nbsp;GB (Orange)</h2>
+            <div class="art"><img src="https://directunlocks.com/devices/compressed/iphone-17-pro.png?v=6" alt="iPhone 17 Pro Max 512 GB Orange"></div>
+          </div>
+          <div class="face back">
+            <h2>iPhone 17 Pro Max</h2>
+            <div class="meta"><div class="price">$1,399.99</div></div>
+            <div class="cta">
+              <a class="btn" href="https://www.apple.com/shop/buy-iphone/iphone-17-pro/6.9-inch-display-512gb-cosmic-orange-att" target="_blank" rel="noopener">Open Apple link</a>
+              <button class="btn" data-flip-back>Flip back</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. AirPods Pro 3 -->
+      <section class="card" data-type="link" data-link="https://www.apple.com/shop/buy-airpods/airpods-pro-3" data-title="AirPods Pro 3">
+        <div class="inner">
+          <div class="face front">
+            <div class="rank r3"><span class="dot"></span>#3</div>
+            <h2>AirPods Pro 3</h2>
+            <div class="art"><img src="https://www.att.com/scmsassets/global/accessories/audio/apple/airpods-pro-3/carousel/4391u-1.png" alt="AirPods Pro 3"></div>
+          </div>
+          <div class="face back">
+            <h2>AirPods Pro 3</h2>
+            <div class="meta"><div class="price">$249.00</div></div>
+            <div class="cta">
+              <a class="btn" href="https://www.apple.com/shop/buy-airpods/airpods-pro-3" target="_blank" rel="noopener">Open Apple link</a>
+              <button class="btn" data-flip-back>Flip back</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. 27" 4K 144Hz Monitor -->
+      <section class="card" data-type="link" data-link="https://www.newegg.com/lxz-lx270zg-27-4k-uhd-144-hz-ips-black/p/3D4-008H-00005" data-title="27&quot; 4K 144Hz Monitor">
+        <div class="inner">
+          <div class="face front">
+            <div class="rank r4"><span class="dot"></span>#4</div>
+            <h2>27&quot; 4K 144Hz Monitor</h2>
+            <div class="art">
+              <img id="monImg" src="monitor.png" alt="27-inch 4K 144Hz monitor">
+            </div>
+          </div>
+          <div class="face back">
+            <h2>27&quot; 4K 144Hz Monitor</h2>
+            <div class="meta"><div class="price">$229.00</div></div>
+            <div class="cta">
+              <a class="btn" href="https://www.newegg.com/lxz-lx270zg-27-4k-uhd-144-hz-ips-black/p/3D4-008H-00005" target="_blank" rel="noopener">Open product link</a>
+              <button class="btn" data-flip-back>Flip back</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. Amazon item ($129) -->
+      <section class="card" data-type="link" data-link="https://a.co/d/e9CLvcx" data-title="Amazon item">
+        <div class="inner">
+          <div class="face front">
+            <div class="rank r5"><span class="dot"></span>#5</div>
+            <h2>Amazon item</h2>
+            <div class="art"><img src="https://cdn.shopify.com/s/files/1/0054/9466/9382/files/c606a6b460f944b4a834.webp?v=1725464276" alt="Amazon item image"></div>
+          </div>
+          <div class="face back">
+            <h2>Amazon item</h2>
+            <div class="meta"><div class="price">$129.00</div></div>
+            <div class="cta">
+              <a class="btn" href="https://a.co/d/e9CLvcx" target="_blank" rel="noopener">Open product link</a>
+              <button class="btn" data-flip-back>Flip back</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. Eilish No.2 Mini Duo Gift Set ($24) -->
+      <section class="card" data-type="link" data-link="https://www.ulta.com/p/eilish-eilish-no-2-mini-duo-gift-set-pimprod2041690" data-title="Eilish No.2 Mini Duo Gift Set">
+        <div class="inner">
+          <div class="face front">
+            <div class="rank r6"><span class="dot"></span>#6</div>
+            <h2>Eilish No.2 Mini Duo Gift Set</h2>
+            <div class="art"><img src="https://media.ulta.com/i/ulta/2616165?w=400&h=400&fmt=auto" alt="Eilish No.2 Mini Duo Gift Set"></div>
+          </div>
+          <div class="face back">
+            <h2>Eilish No.2 Mini Duo Gift Set</h2>
+            <div class="meta"><div class="price">$24.00</div></div>
+            <div class="cta">
+              <a class="btn" href="https://www.ulta.com/p/eilish-eilish-no-2-mini-duo-gift-set-pimprod2041690" target="_blank" rel="noopener">Open product link</a>
+              <button class="btn" data-flip-back>Flip back</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. Alani Nu Energy Drink Variety Pack (18-ct) -->
+      <section class="card" data-type="multi" data-title="Alani Nu Energy Drink, Variety Pack, 18-count">
+        <div class="inner">
+          <div class="face front">
+            <div class="rank r7"><span class="dot"></span>#7</div>
+            <h2>Alani Nu Energy Drink (18‑ct)</h2>
+            <div class="art"><img src="https://bfasset.costco-static.com/U447IH35/as/xfv98tr9k7gxpz7x3s24kkm/1942590__2?auto=webp&amp;format=jpg&amp;width=600&amp;height=600&amp;fit=bounds&amp;canvas=600,600" alt="Alani Nu Energy Drink Variety Pack 18 count"></div>
+          </div>
+          <div class="face back">
+            <h2>Alani Nu Energy Drink (18‑ct)</h2>
+            <div class="meta"><div class="price">$27.00</div></div>
             <div class="cta">
               <button class="btn" data-open-retailer>Choose store</button>
               <button class="btn" data-flip-back>Flip back</button>
@@ -157,12 +258,13 @@
           </div>
         </div>
       </section>
-    
+
     </main>
 
     <footer>Tap to flip • No tracking • Built for GitHub Pages</footer>
   </div>
 
+  <!-- Retailer modal -->
   <div class="modal" id="retailerModal" role="dialog" aria-modal="true" aria-label="Choose store">
     <div class="sheet">
       <h3>Choose retailer</h3>
@@ -221,16 +323,20 @@
     function toggleSparkle(){ document.querySelector('.sparkle').style.display = sparkleToggle.checked ? 'block' : 'none'; }
     sparkleToggle.addEventListener('change', toggleSparkle); toggleSparkle();
 
-    // Monitor image robust fallback chain
+    // Retailer modal controls
+    const retailerModal = document.getElementById('retailerModal');
+    document.addEventListener('click', (e)=>{
+      const openBtn = e.target.closest('[data-open-retailer]');
+      const closeBtn = e.target.closest('[data-close-modal]');
+      if(openBtn){ retailerModal.classList.add('open'); }
+      if(closeBtn || (e.target === retailerModal)){ retailerModal.classList.remove('open'); }
+    });
+
+    // Monitor image fallback chain
     document.addEventListener('DOMContentLoaded', ()=>{
       const monImg = document.getElementById('monImg');
       if(!monImg) return;
-      const fallbacks = [
-        'monitor.png',
-        'image-removebg-preview (2).png',
-        'https://drive.usercontent.google.com/download?id=1-5q_5AooVbw8z6GWjUiigRhp6NYgEz9Z',
-        'https://drive.google.com/uc?export=view&id=1-5q_5AooVbw8z6GWjUiigRhp6NYgEz9Z'
-      ];
+      const fallbacks = [ 'monitor.png', 'image-removebg-preview (2).png' ];
       let i = 0;
       const tryNext = ()=>{
         if(i >= fallbacks.length){
@@ -239,18 +345,7 @@
         }
         monImg.src = fallbacks[i++];
       };
-      monImg.onerror = tryNext; // if first src fails, try next
-      // kick off if initial src missing
-      if(!monImg.complete || monImg.naturalWidth === 0) tryNext();
-    });
-
-    // Retailer modal controls
-    const retailerModal = document.getElementById('retailerModal');
-    document.addEventListener('click', (e)=>{
-      const openBtn = e.target.closest('[data-open-retailer]');
-      const closeBtn = e.target.closest('[data-close-modal]');
-      if(openBtn){ retailerModal.classList.add('open'); }
-      if(closeBtn || (e.target === retailerModal)){ retailerModal.classList.remove('open'); }
+      monImg.onerror = tryNext; if(!monImg.complete || monImg.naturalWidth === 0) tryNext();
     });
 
     // Hide tap hint
