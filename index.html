@@ -69,6 +69,7 @@
     h2{margin:8px 0 8px; font-size:18px; font-weight:800; text-align:center}
     .art{display:flex; align-items:center; justify-content:center; width:100%; max-width:520px; background:rgba(0,0,0,.35); border:1px solid rgba(255,255,255,.06); border-radius:14px; padding:12px; min-height:200px}
     .art img{max-width:100%; max-height:260px; object-fit:contain; filter:drop-shadow(0 20px 24px rgba(0,0,0,.4))}
+    .art .ph{width:100%; min-height:160px; display:flex; align-items:center; justify-content:center; color:var(--muted); border:1px dashed var(--stroke); border-radius:12px; padding:16px; font-weight:700; letter-spacing:.3px}
 
     .back .meta{margin-top:6px; text-align:center}
     .price{font-weight:800; font-size:16px; color:#fff; letter-spacing:.2px; text-shadow:0 0 10px rgba(255,255,255,.25)}
@@ -187,8 +188,7 @@
             <div class="rank r4"><span class="dot"></span>#4</div>
             <h2>27&quot; 4K 144Hz Monitor</h2>
             <div class="art">
-              <img id="monImg" src="https://drive.usercontent.google.com/download?id=1-5q_5AooVbw8z6GWjUiigRhp6NYgEz9Z" alt="27 inch 4K 144Hz monitor"
-                   onerror="this.onerror=null; this.src='https://drive.google.com/uc?export=view&id=1-5q_5AooVbw8z6GWjUiigRhp6NYgEz9Z';">
+              <img id="monImg" alt="27 inch 4K 144Hz monitor">
             </div>
           </div>
           <div class="face back">
@@ -200,7 +200,45 @@
             </div>
           </div>
         </div>
+      </section>      
+      <!-- 5. Amazon item ($129) -->
+      <section class="card" data-type="link" data-link="https://a.co/d/e9CLvcx" data-title="Amazon item">
+        <div class="inner">
+          <div class="face front">
+            <div class="rank r5"><span class="dot"></span>#5</div>
+            <h2>Amazon item</h2>
+            <div class="art"><img src="https://cdn.shopify.com/s/files/1/0054/9466/9382/files/c606a6b460f944b4a834.webp?v=1725464276" alt="Amazon item image"></div>
+          </div>
+          <div class="face back">
+            <h2>Amazon item</h2>
+            <div class="meta"><div class="price">$129.00</div></div>
+            <div class="cta">
+              <a class="btn" href="https://a.co/d/e9CLvcx" target="_blank" rel="noopener">Open product link</a>
+              <button class="btn" data-flip-back>Flip back</button>
+            </div>
+          </div>
+        </div>
       </section>
+
+      <!-- 6. Eilish No.2 Mini Duo Gift Set ($24) -->
+      <section class="card" data-type="link" data-link="https://www.ulta.com/p/eilish-eilish-no-2-mini-duo-gift-set-pimprod2041690" data-title="Eilish No.2 Mini Duo Gift Set">
+        <div class="inner">
+          <div class="face front">
+            <div class="rank r6"><span class="dot"></span>#6</div>
+            <h2>Eilish No.2 Mini Duo Gift Set</h2>
+            <div class="art"><img src="https://media.ulta.com/i/ulta/2616165?w=400&h=400&fmt=auto" alt="Eilish No.2 Mini Duo Gift Set"></div>
+          </div>
+          <div class="face back">
+            <h2>Eilish No.2 Mini Duo Gift Set</h2>
+            <div class="meta"><div class="price">$24.00</div></div>
+            <div class="cta">
+              <a class="btn" href="https://www.ulta.com/p/eilish-eilish-no-2-mini-duo-gift-set-pimprod2041690" target="_blank" rel="noopener">Open product link</a>
+              <button class="btn" data-flip-back>Flip back</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    
     </main>
 
     <footer>Tap to flip • No tracking • Built for GitHub Pages</footer>
@@ -256,6 +294,28 @@
     // Hide tap hint
     const hint = document.getElementById('hint');
     function hideHint(){ if(hint){ hint.style.opacity='0'; setTimeout(()=>hint.remove(), 500); } }
+      // Robust monitor image fallback chain (local > Drive usercontent > Drive uc view)
+    document.addEventListener('DOMContentLoaded', ()=>{
+      const monImg = document.getElementById('monImg');
+      if(!monImg) return;
+      const fallbacks = [
+        'img/monitor.png',
+        'https://drive.usercontent.google.com/download?id=1-5q_5AooVbw8z6GWjUiigRhp6NYgEz9Z',
+        'https://drive.google.com/uc?export=view&id=1-5q_5AooVbw8z6GWjUiigRhp6NYgEz9Z'
+      ];
+      let i = 0;
+      const tryNext = ()=>{
+        if(i >= fallbacks.length){
+          const ph = document.createElement('div');
+          ph.className = 'ph';
+          ph.textContent = 'Image unavailable';
+          monImg.replaceWith(ph);
+          return;
+        }
+        monImg.src = fallbacks[i++];
+      };
+      monImg.onerror = tryNext; tryNext();
+    });
   </script>
   <noscript>This page uses a little JavaScript for the flip effect and snow. Enable JS if you want the animations.</noscript>
 </body>
