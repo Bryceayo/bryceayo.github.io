@@ -83,6 +83,21 @@
     .btn:hover{border-color:rgba(255,255,255,.2)}
     .soon{font-weight:800; font-size:16px; color:var(--gold); text-shadow:0 0 12px rgba(255,212,99,.5)}
 
+    /* Sparkle + snow layers (restored) */
+    .sparkle{position:fixed; inset:0; pointer-events:none; background:
+      radial-gradient(380px 380px at var(--x,50%) var(--y,50%), rgba(255,212,99,.18), transparent 40%),
+      radial-gradient(520px 520px at calc(var(--x,50%)+80px) calc(var(--y,50%)+40px), rgba(255,51,85,.12), transparent 45%);
+      transition:transform .12s ease}
+
+    .snow{position:fixed; inset:0; pointer-events:none; overflow:hidden}
+    .flake{position:absolute; top:-10px; width:3px; height:3px; background:radial-gradient(circle, #fff 0 40%, transparent 41%); border-radius:50%; opacity:.9; filter:drop-shadow(0 0 6px rgba(255,255,255,.7)); animation:fall linear infinite}
+    @keyframes fall{to{transform:translateY(110vh) translateX(var(--drift));}}
+
+    /* Tap burst */
+    .burst{position:fixed; left:0; top:0; pointer-events:none}
+    .burst i{position:absolute; width:4px; height:4px; background:#fff; border-radius:50%; filter:drop-shadow(0 0 6px #fff); animation:pop .6s ease-out forwards}
+    @keyframes pop{to{transform:translate(var(--tx), var(--ty)) scale(.4); opacity:0}}
+
     /* Modal */
     .modal{position:fixed; inset:0; display:none; place-items:center; background:rgba(0,0,0,.55); backdrop-filter:saturate(110%) blur(6px); z-index:50}
     .modal.open{display:grid}
@@ -204,15 +219,15 @@
       </section>
 
       <!-- 5. Amazon item ($129) -->
-      <section class="card" data-type="link" data-link="https://a.co/d/e9CLvcx" data-title="Amazon item">
+      <section class="card" data-type="link" data-link="https://a.co/d/e9CLvcx" data-title="Webcam">
         <div class="inner">
           <div class="face front">
             <div class="rank r5"><span class="dot"></span>#5</div>
-            <h2>Amazon item</h2>
-            <div class="art"><img src="https://cdn.shopify.com/s/files/1/0054/9466/9382/files/c606a6b460f944b4a834.webp?v=1725464276" alt="Amazon item image"></div>
+            $1Webcam$2
+            <div class="art"><img src="https://cdn.shopify.com/s/files/1/0054/9466/9382/files/c606a6b460f944b4a834.webp?v=1725464276" alt="Webcam image"></div>
           </div>
           <div class="face back">
-            <h2>Amazon item</h2>
+            $1Webcam$2
             <div class="meta"><div class="price">$129.00</div></div>
             <div class="cta">
               <a class="btn" href="https://a.co/d/e9CLvcx" target="_blank" rel="noopener">Open product link</a>
@@ -270,7 +285,7 @@
           </div>
           <div class="face back">
             <h2>Team Group MP33 2TB NVMe SSD</h2>
-            <div class="meta"><div class="price">Check current price</div></div>
+            <div class="meta"><div class="price">$113.99</div></div>
             <div class="cta">
               <a class="btn" href="https://www.newegg.com/team-group-2tb-mp33-nvme-1-3/p/N82E16820331431" target="_blank" rel="noopener">Open Newegg link</a>
               <button class="btn" data-flip-back>Flip back</button>
