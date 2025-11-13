@@ -79,11 +79,6 @@
       animation:rainbow 6s ease-in-out infinite; position:relative; z-index:1}
     @keyframes rainbow{0%,100%{filter:hue-rotate(0deg)}50%{filter:hue-rotate(15deg)}}
     .sub{color:var(--muted); font-size:16px; margin-bottom:20px; font-weight:600}
-    .total-price{display:inline-block; margin-top:12px; padding:12px 24px; 
-      background:rgba(255,189,46,.15); border:2px solid var(--gold); border-radius:999px;
-      font-size:18px; font-weight:800; color:#fff; box-shadow:0 4px 20px rgba(255,189,46,.4);
-      animation:pulse-price 2s ease-in-out infinite}
-    @keyframes pulse-price{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
 
     .controls{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:32px}
     .pill{display:inline-flex; align-items:center; gap:10px; border:2px solid var(--stroke); 
@@ -110,7 +105,7 @@
       box-shadow:inset 0 2px 0 rgba(255,255,255,.2), 0 0 20px rgba(0,229,160,.5)}
     .toggle:checked:before{transform:translateX(20px); background:linear-gradient(145deg, #fff, #f0f0f0)}
 
-    /* Grid - ULTRA MOBILE OPTIMIZED */
+    /* Grid */
     .grid{display:grid; gap:24px; padding:0 4px}
     @media(min-width:720px){.grid{grid-template-columns:repeat(3,1fr); gap:24px}}
     @media(max-width:719px){.grid{gap:28px}}
@@ -148,6 +143,15 @@
     .front{background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03))}
     .back{position:absolute; inset:0; transform:rotateY(180deg); 
       background:linear-gradient(145deg, rgba(0,0,0,.4), rgba(255,255,255,.06))}
+
+    /* Question mark overlay */
+    .mystery{position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+      background:rgba(0,0,0,.7); backdrop-filter:blur(10px); border-radius:var(--radius);
+      z-index:10; transition:opacity .4s ease, visibility .4s ease}
+    .mystery-icon{font-size:120px; animation:float 3s ease-in-out infinite;
+      filter:drop-shadow(0 0 30px rgba(255,189,46,.8))}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+    .card.flipped .mystery{opacity:0; visibility:hidden}
 
     .rank{position:absolute; top:16px; left:16px; font-weight:900; font-size:16px; 
       background:rgba(0,0,0,.75); border:2px solid rgba(255,255,255,.3); 
@@ -218,7 +222,7 @@
       background:
         radial-gradient(500px 500px at var(--x,50%) var(--y,50%), rgba(255,189,46,.25), transparent 45%),
         radial-gradient(650px 650px at calc(var(--x,50%)+100px) calc(var(--y,50%)+60px), rgba(255,45,85,.18), transparent 50%);
-      transition:opacity .3s ease; mix-blend-mode:screen; opacity:1}
+      mix-blend-mode:screen; opacity:1; transition:opacity .3s ease}
     .sparkle.hidden{opacity:0}
 
     /* Snow */
@@ -228,7 +232,7 @@
       filter:drop-shadow(0 0 8px rgba(255,255,255,.8)); animation:fall linear infinite}
     @keyframes fall{to{transform:translateY(110vh) translateX(var(--drift)) rotate(360deg); opacity:0}}
 
-    /* MEGA Confetti */
+    /* Confetti */
     .confetti{position:fixed; inset:0; pointer-events:none; z-index:100}
     .confetto{position:absolute; width:10px; height:10px; border-radius:2px; opacity:1;
       animation:confettiFall 3s cubic-bezier(.25,.46,.45,.94) forwards}
@@ -276,7 +280,7 @@
       backdrop-filter:blur(10px)}
     @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-10px)}}
 
-    /* Santa hat easter egg */
+    /* Santa hat */
     .santa-hat{position:fixed; top:10px; right:10px; font-size:40px; cursor:pointer; 
       z-index:20; animation:swing 3s ease-in-out infinite; transition:transform .3s}
     .santa-hat:hover{transform:scale(1.2) rotate(15deg)}
@@ -298,11 +302,11 @@
   <div class="santa-hat" id="santaHat" title="Click me! 🎅">🎅</div>
 
   <div class="wrap">
-    <!-- MEGA Christmas Countdown -->
+    <!-- Christmas Countdown -->
     <div class="countdown">
       <div class="countdown-content">
         <div class="countdown-title">🎄 Christmas Countdown 🎄</div>
-        <div class="countdown-timer" id="countdown">Loading...</div>
+        <div class="countdown-timer" id="countdown">...</div>
         <div class="countdown-subtitle">Until presents under the tree! 🎁</div>
       </div>
     </div>
@@ -319,7 +323,6 @@
     <header>
       <h1>🎄 Jett's Christmas List 2025 🎁</h1>
       <div class="sub">✨ Tap any card to reveal the magic ✨</div>
-      <div class="total-price" id="totalPrice">💰 Total: $2,372.98</div>
     </header>
 
     <div class="controls">
@@ -339,8 +342,11 @@
 
     <main class="grid">
       <!-- 1. M5 Max MacBook Pro -->
-      <section class="card" data-type="soon" data-viewed="false">
+      <section class="card" data-viewed="false">
         <div class="inner">
+          <div class="mystery">
+            <div class="mystery-icon">❓</div>
+          </div>
           <div class="face front">
             <div class="rank r1"><span class="dot"></span>#1</div>
             <h2>M5 Max MacBook Pro</h2>
@@ -358,6 +364,9 @@
       <!-- 2. iPhone 17 Pro Max -->
       <section class="card" data-viewed="false">
         <div class="inner">
+          <div class="mystery">
+            <div class="mystery-icon">❓</div>
+          </div>
           <div class="face front">
             <div class="rank r2"><span class="dot"></span>#2</div>
             <h2>iPhone 17 Pro Max 512 GB (Orange)</h2>
@@ -377,6 +386,9 @@
       <!-- 3. AirPods Pro 3 -->
       <section class="card" data-viewed="false">
         <div class="inner">
+          <div class="mystery">
+            <div class="mystery-icon">❓</div>
+          </div>
           <div class="face front">
             <div class="rank r3"><span class="dot"></span>#3</div>
             <h2>AirPods Pro 3</h2>
@@ -396,6 +408,9 @@
       <!-- 4. Monitor -->
       <section class="card" data-viewed="false">
         <div class="inner">
+          <div class="mystery">
+            <div class="mystery-icon">❓</div>
+          </div>
           <div class="face front">
             <div class="rank r4"><span class="dot"></span>#4</div>
             <h2>27" 4K 144Hz Monitor</h2>
@@ -415,6 +430,9 @@
       <!-- 5. Webcam -->
       <section class="card" data-viewed="false">
         <div class="inner">
+          <div class="mystery">
+            <div class="mystery-icon">❓</div>
+          </div>
           <div class="face front">
             <div class="rank r5"><span class="dot"></span>#5</div>
             <h2>Webcam</h2>
@@ -425,7 +443,7 @@
             <div class="meta"><div class="price">$129.00</div></div>
             <div class="cta">
               <a class="btn" href="https://a.co/d/e9CLvcx" target="_blank" rel="noopener">🛒 Buy Now</a>
-              <button class="btn" data-flip-back">⬅️ Back</button>
+              <button class="btn" data-flip-back>⬅️ Back</button>
             </div>
           </div>
         </div>
@@ -434,6 +452,9 @@
       <!-- 6. Eilish Perfume -->
       <section class="card" data-viewed="false">
         <div class="inner">
+          <div class="mystery">
+            <div class="mystery-icon">❓</div>
+          </div>
           <div class="face front">
             <div class="rank r6"><span class="dot"></span>#6</div>
             <h2>Eilish No.2 Mini Duo Gift Set</h2>
@@ -453,6 +474,9 @@
       <!-- 7. Alani Nu -->
       <section class="card" data-type="multi" data-viewed="false">
         <div class="inner">
+          <div class="mystery">
+            <div class="mystery-icon">❓</div>
+          </div>
           <div class="face front">
             <div class="rank r7"><span class="dot"></span>#7</div>
             <h2>Alani Nu Energy Drink (18-ct)</h2>
@@ -472,6 +496,9 @@
       <!-- 8. SSD -->
       <section class="card" data-viewed="false">
         <div class="inner">
+          <div class="mystery">
+            <div class="mystery-icon">❓</div>
+          </div>
           <div class="face front">
             <div class="rank r8"><span class="dot"></span>#8</div>
             <h2>Team Group MP33 2TB NVMe SSD</h2>
@@ -507,7 +534,7 @@
   <div class="hint" id="hint">👆 Tap a card to flip & see the magic!</div>
 
   <script>
-    // Progress tracking
+    // Progress tracking - FIXED
     let viewedCards = new Set();
     function updateProgress(){
       const total = document.querySelectorAll('.card').length;
@@ -532,43 +559,52 @@
         makeFireworks(window.innerWidth/2, window.innerHeight/2);
         setTimeout(()=>makeFireworks(window.innerWidth/3, window.innerHeight/3), 300);
         setTimeout(()=>makeFireworks(2*window.innerWidth/3, window.innerHeight/3), 600);
+        playSuccess();
       }
     }
 
-    // Christmas Countdown
+    // Christmas Countdown - FIXED
     function updateCountdown(){
-      const xmas = new Date('2025-12-25T00:00:00');
+      const xmas = new Date('December 25, 2025 00:00:00');
       const now = new Date();
       const diff = xmas - now;
+      
       if(diff <= 0){ 
         document.getElementById('countdown').textContent = "🎉 IT'S CHRISTMAS! 🎄"; 
         return; 
       }
+      
       const days = Math.floor(diff / (1000*60*60*24));
       const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
       const mins = Math.floor((diff % (1000*60*60)) / (1000*60));
       const secs = Math.floor((diff % (1000*60)) / 1000);
+      
       document.getElementById('countdown').textContent = `${days}d ${hours}h ${mins}m ${secs}s`;
     }
-    updateCountdown(); setInterval(updateCountdown, 1000);
+    
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
 
     // Sparkle cursor trail - FIXED
     const sparkle = document.getElementById('sparkle');
     const sparkleToggle = document.getElementById('sparkleToggle');
+    
     function setSparkle(x, y){ 
       sparkle.style.setProperty('--x', x+'px'); 
       sparkle.style.setProperty('--y', y+'px'); 
     }
+    
     function moveSparkle(e){ 
       if(!sparkleToggle.checked) return;
       const x = e.touches ? e.touches[0].clientX : e.clientX; 
       const y = e.touches ? e.touches[0].clientY : e.clientY; 
       setSparkle(x,y); 
     }
+    
     document.addEventListener('pointermove', moveSparkle, {passive:true});
     document.addEventListener('touchmove', moveSparkle, {passive:true});
 
-    // Toggle sparkle visibility
+    // Toggle sparkle visibility - FIXED
     function toggleSparkle(){ 
       if(sparkleToggle.checked){
         sparkle.classList.remove('hidden');
@@ -579,30 +615,55 @@
     sparkleToggle.addEventListener('change', toggleSparkle);
     toggleSparkle();
 
-    // Snow
+    // Snow - FIXED
     const snowWrap = document.getElementById('snow');
     const snowToggle = document.getElementById('snowToggle');
+    
     function makeSnow(){
       snowWrap.innerHTML = '';
-      const count = 100, W = window.innerWidth;
-      for(let i=0;i<count;i++){
-        const f = document.createElement('span'); f.className = 'flake';
-        const size = Math.random()*3+1.5, left = Math.random()*W, delay = Math.random()*8, dur = Math.random()*12+10;
+      const count = 100;
+      const W = window.innerWidth;
+      
+      for(let i=0; i<count; i++){
+        const f = document.createElement('span');
+        f.className = 'flake';
+        const size = Math.random()*3+1.5;
+        const left = Math.random()*W;
+        const delay = Math.random()*8;
+        const dur = Math.random()*12+10;
         const drift = (Math.random()*180-90)+'px';
-        Object.assign(f.style, {width:size+'px', height:size+'px', left:left+'px', animationDuration:dur+'s', animationDelay:delay+'s'});
-        f.style.setProperty('--drift', drift); snowWrap.appendChild(f);
+        
+        Object.assign(f.style, {
+          width: size+'px',
+          height: size+'px',
+          left: left+'px',
+          animationDuration: dur+'s',
+          animationDelay: delay+'s'
+        });
+        f.style.setProperty('--drift', drift);
+        snowWrap.appendChild(f);
       }
     }
-    function toggleSnow(){ snowWrap.style.display = snowToggle.checked ? 'block' : 'none'; }
-    makeSnow(); toggleSnow(); window.addEventListener('resize', makeSnow); snowToggle.addEventListener('change', toggleSnow);
+    
+    function toggleSnow(){ 
+      snowWrap.style.display = snowToggle.checked ? 'block' : 'none'; 
+    }
+    
+    makeSnow();
+    toggleSnow();
+    window.addEventListener('resize', makeSnow);
+    snowToggle.addEventListener('change', toggleSnow);
 
-    // MEGA Confetti
+    // Confetti
     const confettiWrap = document.getElementById('confetti');
     const colors = ['#ff2d55','#00e5a0','#ffbd2e','#5e9eff','#bf5af2','#68e8ff','#ff87c5','#c0ff72'];
+    
     function makeConfetti(x,y){
-      for(let i=0;i<40;i++){
-        const c = document.createElement('div'); c.className = 'confetto';
-        c.style.left = x+'px'; c.style.top = y+'px';
+      for(let i=0; i<40; i++){
+        const c = document.createElement('div');
+        c.className = 'confetto';
+        c.style.left = x+'px';
+        c.style.top = y+'px';
         c.style.background = colors[Math.floor(Math.random()*colors.length)];
         const drift = (Math.random()*400-200)+'px';
         const delay = Math.random()*0.15;
@@ -617,10 +678,12 @@
     const fireworksWrap = document.getElementById('fireworks');
     function makeFireworks(x,y){
       const fwColors = ['#ff2d55','#00e5a0','#ffbd2e','#5e9eff','#bf5af2'];
-      for(let i=0;i<30;i++){
-        const f = document.createElement('div'); f.className = 'firework';
+      for(let i=0; i<30; i++){
+        const f = document.createElement('div');
+        f.className = 'firework';
         const color = fwColors[Math.floor(Math.random()*fwColors.length)];
-        f.style.left = x+'px'; f.style.top = y+'px';
+        f.style.left = x+'px';
+        f.style.top = y+'px';
         f.style.setProperty('--color', color);
         const angle = (Math.PI*2/30)*i;
         const dist = Math.random()*200+100;
@@ -633,15 +696,15 @@
       }
     }
 
-    // Sound - ENHANCED
-    const soundToggle = document.getElementById('soundToggle'); 
+    // Sound
+    const soundToggle = document.getElementById('soundToggle');
     let audioCtx=null;
+    
     function playChime(){ 
       if(!soundToggle.checked) return; 
       if(!audioCtx) audioCtx = new (window.AudioContext||window.webkitAudioContext)(); 
       const now=audioCtx.currentTime; 
       
-      // Bell sound
       const o=audioCtx.createOscillator(), g=audioCtx.createGain(); 
       o.type='sine'; o.frequency.setValueAtTime(880,now); 
       g.gain.setValueAtTime(0.001,now); 
@@ -649,7 +712,6 @@
       g.gain.exponentialRampToValueAtTime(0.0001,now+0.4); 
       o.connect(g).connect(audioCtx.destination); o.start(); o.stop(now+0.41); 
       
-      // Second harmonic
       const o2=audioCtx.createOscillator(), g2=audioCtx.createGain(); 
       o2.type='sine'; o2.frequency.setValueAtTime(1320,now+0.06); 
       g2.gain.setValueAtTime(0.001,now+0.06); 
@@ -673,29 +735,8 @@
       });
     }
 
-    // Card flipping
+    // Card flipping - FIXED with question marks
     document.querySelectorAll('.card').forEach(card=>{
       const flipBackBtns = card.querySelectorAll('[data-flip-back]');
-      card.addEventListener('click', e=>{
-        if(e.target.closest('a')) return;
-        if(e.target.closest('[data-flip-back]')) return;
-        if(e.target.closest('[data-open-retailer]')) return;
-        
-        const wasFlipped = card.classList.contains('flipped');
-        card.classList.toggle('flipped');
-        playChime();
-        
-        if(!wasFlipped){
-          // Mark as viewed
-          if(card.dataset.viewed === 'false'){
-            card.dataset.viewed = 'true';
-            viewedCards.add(card);
-            updateProgress();
-          }
-          
-          // Confetti
-          const rect = card.getBoundingClientRect();
-          makeConfetti(rect.left + rect.width/2, rect.top + rect.height/2);
-        }
-        hideHint();
-      });
+      
+      card.
