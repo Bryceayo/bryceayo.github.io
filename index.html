@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Jett’s Christmas List 2025</title>
-  <meta name="description" content="Festive, mobile‑first wish list with animated background and flip cards." />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <title>Jett's Christmas List 2025 🎄</title>
+  <meta name="description" content="Festive wish list with animations and interactive surprises!" />
   <style>
     :root{
       --bg:#07090c; --bg2:#0c0f15; --text:#eef1f5; --muted:#a7b0bd;
@@ -12,8 +12,8 @@
       --stroke:rgba(255,255,255,.12); --shadow:0 18px 40px rgba(0,0,0,.45);
       --radius:20px; --maxw:980px;
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
+    *{box-sizing:border-box; -webkit-tap-highlight-color:transparent}
+    html,body{height:100%; overflow-x:hidden}
     body{margin:0; font:16px/1.45 Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; color:var(--text);
       background:
         radial-gradient(1200px 800px at 100% -10%, rgba(255,51,85,.16), transparent 40%),
@@ -31,120 +31,191 @@
     @keyframes spin{to{transform:rotate(360deg)}}
     @keyframes bob{0%{transform:translateY(-2vmax)}100%{transform:translateY(2vmax)}}
 
-    .wrap{max-width:var(--maxw); margin:auto; padding:20px 16px 40px; position:relative}
+    .wrap{max-width:var(--maxw); margin:auto; padding:16px 12px 60px; position:relative}
 
-    header{display:flex; align-items:center; justify-content:space-between; gap:12px; margin:8px 0 18px}
-    h1{margin:0; font-weight:900; letter-spacing:.3px; font-size:clamp(22px,3.4vw,36px);
+    /* Countdown banner */
+    .countdown{background:linear-gradient(135deg, rgba(255,51,85,.18), rgba(21,225,140,.15)); 
+      border:1px solid var(--stroke); border-radius:16px; padding:16px; margin:16px 0 20px;
+      text-align:center; box-shadow:0 8px 32px rgba(0,0,0,.35)}
+    .countdown-title{font-size:13px; color:var(--muted); margin-bottom:6px; font-weight:600}
+    .countdown-timer{font-size:32px; font-weight:900; 
+      background:linear-gradient(135deg, var(--red), var(--gold), var(--green)); 
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      text-shadow:0 0 20px rgba(255,212,99,.5); letter-spacing:2px}
+
+    header{text-align:center; margin:12px 0 24px}
+    h1{margin:0 0 8px; font-weight:900; letter-spacing:.3px; font-size:clamp(28px,6vw,42px);
       background:conic-gradient(from 10deg, #fff, var(--gold), #fff); -webkit-background-clip:text; background-clip:text; color:transparent;
-      text-shadow:0 0 24px rgba(255,212,99,.45), 0 0 40px rgba(255,51,85,.35)}
-    .sub{color:var(--muted); font-size:13px}
+      text-shadow:0 0 24px rgba(255,212,99,.45), 0 0 40px rgba(255,51,85,.35);
+      animation:glow 3s ease-in-out infinite}
+    @keyframes glow{0%,100%{filter:brightness(1)}50%{filter:brightness(1.2)}}
+    .sub{color:var(--muted); font-size:14px; margin-bottom:16px}
 
-    .controls{display:flex; gap:10px; align-items:center}
-    .pill{display:inline-flex; align-items:center; gap:10px; border:1px solid var(--stroke); background:rgba(255,255,255,.06); padding:8px 12px; border-radius:999px; box-shadow:0 2px 10px rgba(0,0,0,.25)}
+    .controls{display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-bottom:20px}
+    .pill{display:inline-flex; align-items:center; gap:8px; border:1px solid var(--stroke); 
+      background:rgba(255,255,255,.06); padding:10px 16px; border-radius:999px; 
+      box-shadow:0 2px 10px rgba(0,0,0,.25); font-size:14px; font-weight:600;
+      transition:all .2s ease; cursor:pointer}
+    .pill:active{transform:scale(.95)}
 
     /* Toggle slider */
     .toggle{appearance:none; width:42px; height:24px; position:relative; border-radius:999px; outline:none; cursor:pointer;
-      background:linear-gradient(180deg, #0f1420, #0a0f18); border:1px solid var(--stroke); box-shadow:inset 0 1px 0 rgba(255,255,255,.06), inset 0 -8px 16px rgba(0,0,0,.35)}
-    .toggle:before{content:""; position:absolute; top:2px; left:2px; width:20px; height:20px; border-radius:50%; background:#fff; box-shadow:0 2px 8px rgba(0,0,0,.35); transition:transform .2s ease}
+      background:linear-gradient(180deg, #0f1420, #0a0f18); border:1px solid var(--stroke); box-shadow:inset 0 1px 0 rgba(255,255,255,.06), inset 0 -8px 16px rgba(0,0,0,.35);
+      transition:background .3s ease}
+    .toggle:before{content:""; position:absolute; top:2px; left:2px; width:20px; height:20px; border-radius:50%; background:#fff; box-shadow:0 2px 8px rgba(0,0,0,.35); transition:transform .3s cubic-bezier(.4,0,.2,1)}
     .toggle:checked{background:linear-gradient(90deg, rgba(255,51,85,.65), rgba(21,225,140,.65))}
     .toggle:checked:before{transform:translateX(18px)}
 
-    /* Grid */
-    .grid{display:grid; gap:14px}
-    @media(min-width:720px){.grid{grid-template-columns:repeat(3,1fr)}}
+    /* Grid - IMPROVED MOBILE */
+    .grid{display:grid; gap:16px; padding:0 4px}
+    @media(min-width:720px){.grid{grid-template-columns:repeat(3,1fr); gap:18px}}
+    @media(max-width:719px){.grid{gap:20px}}
 
-    .card{position:relative; perspective:1200px}
-    .inner{position:relative; border:1px solid var(--stroke); border-radius:var(--radius); background:linear-gradient(145deg, rgba(255,255,255,.06), rgba(255,255,255,.03)); box-shadow:var(--shadow); transform-style:preserve-3d; transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+    .card{position:relative; perspective:1400px; cursor:pointer}
+    .card:active{transform:scale(.98)}
+    .inner{position:relative; border:1px solid var(--stroke); border-radius:var(--radius); 
+      background:linear-gradient(145deg, rgba(255,255,255,.06), rgba(255,255,255,.03)); 
+      box-shadow:var(--shadow); transform-style:preserve-3d; 
+      transition:transform .7s cubic-bezier(.2,.7,.2,1), box-shadow .3s ease}
+    .card:hover .inner{box-shadow:0 20px 50px rgba(0,0,0,.55)}
     .card.flipped .inner{transform:rotateY(180deg)}
 
-    .face{position:relative; min-height:320px; padding:16px; border-radius:var(--radius); display:flex; flex-direction:column; align-items:center; justify-content:center; backface-visibility:hidden}
+    .face{position:relative; min-height:340px; padding:18px; border-radius:var(--radius); 
+      display:flex; flex-direction:column; align-items:center; justify-content:center; 
+      backface-visibility:hidden}
+    @media(max-width:719px){.face{min-height:380px; padding:20px}}
     .front{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02))}
-    .back{position:absolute; inset:0; transform:rotateY(180deg); background:linear-gradient(180deg, rgba(0,0,0,.3), rgba(255,255,255,.04))}
+    .back{position:absolute; inset:0; transform:rotateY(180deg); 
+      background:linear-gradient(180deg, rgba(0,0,0,.3), rgba(255,255,255,.04))}
 
-    .rank{position:absolute; top:12px; left:12px; font-weight:800; font-size:14px; background:rgba(0,0,0,.55); border:1px solid rgba(255,255,255,.2); padding:6px 10px; border-radius:999px; letter-spacing:.4px}
-    .rank .dot{display:inline-block; width:6px; height:6px; border-radius:50%; margin-right:8px; background:var(--red); box-shadow:0 0 10px var(--red)}
-    .rank.r2 .dot{background:var(--green); box-shadow:0 0 10px var(--green)}
-    .rank.r3 .dot{background:var(--blue); box-shadow:0 0 10px var(--blue)}
-    .rank.r4 .dot{background:var(--gold); box-shadow:0 0 10px var(--gold)}
-    .rank.r5 .dot{background:var(--purple); box-shadow:0 0 10px var(--purple)}
-    .rank.r6 .dot{background:#68e8ff; box-shadow:0 0 10px #68e8ff}
-    .rank.r7 .dot{background:#ff87c5; box-shadow:0 0 10px #ff87c5}
+    .rank{position:absolute; top:14px; left:14px; font-weight:800; font-size:15px; 
+      background:rgba(0,0,0,.65); border:1px solid rgba(255,255,255,.25); 
+      padding:8px 14px; border-radius:999px; letter-spacing:.5px;
+      box-shadow:0 4px 16px rgba(0,0,0,.4)}
+    .rank .dot{display:inline-block; width:7px; height:7px; border-radius:50%; margin-right:8px; 
+      background:var(--red); box-shadow:0 0 12px var(--red); animation:pulse 2s ease-in-out infinite}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+    .rank.r2 .dot{background:var(--green); box-shadow:0 0 12px var(--green)}
+    .rank.r3 .dot{background:var(--blue); box-shadow:0 0 12px var(--blue)}
+    .rank.r4 .dot{background:var(--gold); box-shadow:0 0 12px var(--gold)}
+    .rank.r5 .dot{background:var(--purple); box-shadow:0 0 12px var(--purple)}
+    .rank.r6 .dot{background:#68e8ff; box-shadow:0 0 12px #68e8ff}
+    .rank.r7 .dot{background:#ff87c5; box-shadow:0 0 12px #ff87c5}
+    .rank.r8 .dot{background:#c0ff72; box-shadow:0 0 12px #c0ff72}
 
-    h2{margin:8px 0 8px; font-size:18px; font-weight:800; text-align:center}
-    .art{display:flex; align-items:center; justify-content:center; width:100%; max-width:520px; background:rgba(0,0,0,.35); border:1px solid rgba(255,255,255,.06); border-radius:14px; padding:12px; min-height:200px}
-    .art img{max-width:100%; max-height:260px; object-fit:contain; filter:drop-shadow(0 20px 24px rgba(0,0,0,.4))}
-    .art .ph{width:100%; min-height:160px; display:flex; align-items:center; justify-content:center; color:var(--muted); border:1px dashed var(--stroke); border-radius:12px; padding:16px; font-weight:700; letter-spacing:.3px}
+    h2{margin:12px 0 14px; font-size:clamp(17px,4vw,20px); font-weight:800; text-align:center; line-height:1.3}
+    .art{display:flex; align-items:center; justify-content:center; width:100%; max-width:520px; 
+      background:rgba(0,0,0,.35); border:1px solid rgba(255,255,255,.06); border-radius:16px; 
+      padding:16px; min-height:220px}
+    @media(max-width:719px){.art{min-height:240px; padding:20px}}
+    .art img{max-width:100%; max-height:280px; object-fit:contain; 
+      filter:drop-shadow(0 20px 24px rgba(0,0,0,.4)); transition:transform .3s ease}
+    .card:hover .art img{transform:scale(1.05)}
+    .art .ph{width:100%; min-height:180px; display:flex; align-items:center; justify-content:center; 
+      color:var(--muted); border:1px dashed var(--stroke); border-radius:12px; padding:16px; 
+      font-weight:700; letter-spacing:.3px}
 
-    .back .meta{margin-top:6px; text-align:center}
-    .price{font-weight:800; font-size:16px; color:#fff; letter-spacing:.2px; text-shadow:0 0 10px rgba(255,255,255,.25)}
+    .back .meta{margin-top:8px; text-align:center}
+    .price{font-weight:800; font-size:clamp(18px,4vw,22px); color:#fff; letter-spacing:.2px; 
+      text-shadow:0 0 12px rgba(255,255,255,.3); margin-bottom:4px}
 
-    .back .cta{display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:10px}
-    .btn{appearance:none; border:1px solid var(--stroke); color:#fff; background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04)); padding:10px 14px; border-radius:12px; cursor:pointer; text-decoration:none; font-weight:700}
-    .btn:hover{border-color:rgba(255,255,255,.2)}
-    .soon{font-weight:800; font-size:16px; color:var(--gold); text-shadow:0 0 12px rgba(255,212,99,.5)}
+    .back .cta{display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top:14px}
+    @media(max-width:719px){.back .cta{flex-direction:column; gap:10px}}
+    .btn{appearance:none; border:1px solid var(--stroke); color:#fff; 
+      background:linear-gradient(180deg, rgba(255,255,255,.1), rgba(255,255,255,.05)); 
+      padding:14px 20px; border-radius:14px; cursor:pointer; text-decoration:none; 
+      font-weight:700; font-size:15px; transition:all .2s ease; 
+      box-shadow:0 4px 12px rgba(0,0,0,.25); white-space:nowrap}
+    .btn:hover{border-color:rgba(255,255,255,.3); background:linear-gradient(180deg, rgba(255,255,255,.15), rgba(255,255,255,.08)); transform:translateY(-2px)}
+    .btn:active{transform:scale(.96)}
+    @media(max-width:719px){.btn{padding:16px 24px; font-size:16px; width:100%}}
+    .soon{font-weight:800; font-size:clamp(16px,4vw,18px); color:var(--gold); 
+      text-shadow:0 0 14px rgba(255,212,99,.6); animation:shimmer 2s ease-in-out infinite}
+    @keyframes shimmer{0%,100%{opacity:1}50%{opacity:.7}}
 
-    /* Sparkle + snow layers (restored) */
+    /* Sparkle + snow */
     .sparkle{position:fixed; inset:0; pointer-events:none; background:
-      radial-gradient(380px 380px at var(--x,50%) var(--y,50%), rgba(255,212,99,.18), transparent 40%),
-      radial-gradient(520px 520px at calc(var(--x,50%)+80px) calc(var(--y,50%)+40px), rgba(255,51,85,.12), transparent 45%);
-      transition:transform .12s ease}
+      radial-gradient(400px 400px at var(--x,50%) var(--y,50%), rgba(255,212,99,.2), transparent 40%),
+      radial-gradient(550px 550px at calc(var(--x,50%)+80px) calc(var(--y,50%)+40px), rgba(255,51,85,.14), transparent 45%);
+      transition:transform .1s ease; mix-blend-mode:screen}
 
     .snow{position:fixed; inset:0; pointer-events:none; overflow:hidden}
-    .flake{position:absolute; top:-10px; width:3px; height:3px; background:radial-gradient(circle, #fff 0 40%, transparent 41%); border-radius:50%; opacity:.9; filter:drop-shadow(0 0 6px rgba(255,255,255,.7)); animation:fall linear infinite}
-    @keyframes fall{to{transform:translateY(110vh) translateX(var(--drift));}}
+    .flake{position:absolute; top:-10px; width:3px; height:3px; 
+      background:radial-gradient(circle, #fff 0 40%, transparent 41%); border-radius:50%; opacity:.9; 
+      filter:drop-shadow(0 0 6px rgba(255,255,255,.7)); animation:fall linear infinite}
+    @keyframes fall{to{transform:translateY(110vh) translateX(var(--drift)); opacity:0}}
 
-    /* Tap burst */
-    .burst{position:fixed; left:0; top:0; pointer-events:none}
-    .burst i{position:absolute; width:4px; height:4px; background:#fff; border-radius:50%; filter:drop-shadow(0 0 6px #fff); animation:pop .6s ease-out forwards}
-    @keyframes pop{to{transform:translate(var(--tx), var(--ty)) scale(.4); opacity:0}}
+    /* Confetti burst */
+    .confetti{position:fixed; inset:0; pointer-events:none; z-index:100}
+    .confetto{position:absolute; width:8px; height:8px; border-radius:2px; opacity:1;
+      animation:confettiFall 2s cubic-bezier(.25,.46,.45,.94) forwards}
+    @keyframes confettiFall{
+      0%{transform:translateY(0) translateX(0) rotateZ(0deg); opacity:1}
+      100%{transform:translateY(100vh) translateX(var(--drift)) rotateZ(720deg); opacity:0}
+    }
 
     /* Modal */
-    .modal{position:fixed; inset:0; display:none; place-items:center; background:rgba(0,0,0,.55); backdrop-filter:saturate(110%) blur(6px); z-index:50}
+    .modal{position:fixed; inset:0; display:none; place-items:center; 
+      background:rgba(0,0,0,.6); backdrop-filter:saturate(110%) blur(8px); z-index:50;
+      animation:fadeIn .2s ease}
+    @keyframes fadeIn{from{opacity:0}}
     .modal.open{display:grid}
-    .sheet{width:min(540px,92vw); background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04)); border:1px solid var(--stroke); border-radius:16px; box-shadow:var(--shadow); padding:16px}
-    .sheet h3{margin:0 0 10px; font-size:18px}
-    .row{display:flex; gap:10px; flex-wrap:wrap}
+    .sheet{width:min(540px,92vw); background:linear-gradient(180deg, rgba(255,255,255,.1), rgba(255,255,255,.05)); 
+      border:1px solid var(--stroke); border-radius:20px; box-shadow:var(--shadow); padding:24px;
+      animation:slideUp .3s cubic-bezier(.2,.7,.2,1)}
+    @keyframes slideUp{from{transform:translateY(20px); opacity:0}}
+    .sheet h3{margin:0 0 16px; font-size:20px; font-weight:800}
+    .row{display:flex; gap:12px; flex-wrap:wrap}
+    @media(max-width:719px){.row{flex-direction:column}}
     .sheet .btn{flex:1 1 180px; text-align:center}
-    .sheet .close{margin-top:10px; display:block; width:100%}
+    .sheet .close{margin-top:14px; display:block; width:100%}
 
-    footer{margin:18px 0 0; text-align:center; color:var(--muted); font-size:12px}
-    .hint{position:fixed; bottom:14px; left:50%; transform:translateX(-50%); background:rgba(0,0,0,.55); border:1px solid var(--stroke); padding:8px 12px; border-radius:999px; font-size:12px; color:#dfe6ef; box-shadow:0 6px 22px rgba(0,0,0,.35)}
+    footer{margin:24px 0 0; text-align:center; color:var(--muted); font-size:13px; padding-bottom:20px}
+    .hint{position:fixed; bottom:20px; left:50%; transform:translateX(-50%); 
+      background:rgba(0,0,0,.7); border:1px solid var(--stroke); padding:12px 20px; 
+      border-radius:999px; font-size:13px; color:#dfe6ef; box-shadow:0 8px 28px rgba(0,0,0,.45);
+      animation:bounce 2s ease-in-out infinite; z-index:10}
+    @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-8px)}}
 
-    @media (prefers-reduced-motion: reduce){ .sparkle,.snow,.bgfloat{display:none} .inner{transition:none} }
-  .rank.r8 .dot{background:#c0ff72; box-shadow:0 0 10px #c0ff72}
+    @media (prefers-reduced-motion: reduce){ .sparkle,.snow,.bgfloat,.confetti{display:none} .inner{transition:none} }
   </style>
 </head>
 <body>
   <div class="bgfloat" aria-hidden="true"></div>
   <div class="sparkle" aria-hidden="true"></div>
   <div class="snow" id="snow" aria-hidden="true"></div>
-  <div class="burst" id="burst" aria-hidden="true"></div>
+  <div class="confetti" id="confetti" aria-hidden="true"></div>
 
-  <div class="wrap" role="document" aria-label="Jett’s Christmas List 2025">
+  <div class="wrap">
+    <!-- Christmas Countdown -->
+    <div class="countdown">
+      <div class="countdown-title">🎄 Christmas Countdown 🎁</div>
+      <div class="countdown-timer" id="countdown">Loading...</div>
+    </div>
+
     <header>
-      <div>
-        <h1>Jett’s Christmas List 2025</h1>
-        <div class="sub">Tap a card to flip • Mobile first</div>
-      </div>
-      <div class="controls">
-        <label class="pill" title="Toggle snow">
-          <input type="checkbox" class="toggle" id="snowToggle" checked>
-          <span>Snow</span>
-        </label>
-        <label class="pill" title="Toggle glow">
-          <input type="checkbox" class="toggle" id="sparkleToggle" checked>
-          <span>Glow</span>
-        </label>
-        <label class="pill" title="Toggle chime">
-          <input type="checkbox" class="toggle" id="soundToggle">
-          <span>SFX</span>
-        </label>
-      </div>
+      <h1>🎅 Jett's Christmas List 2025 🎄</h1>
+      <div class="sub">✨ Tap any card to reveal details ✨</div>
     </header>
 
-    <main class="grid" aria-label="Wish list items">
+    <div class="controls">
+      <label class="pill" title="Toggle snow">
+        <input type="checkbox" class="toggle" id="snowToggle" checked>
+        <span>❄️ Snow</span>
+      </label>
+      <label class="pill" title="Toggle glow">
+        <input type="checkbox" class="toggle" id="sparkleToggle" checked>
+        <span>✨ Glow</span>
+      </label>
+      <label class="pill" title="Toggle sound">
+        <input type="checkbox" class="toggle" id="soundToggle">
+        <span>🔔 SFX</span>
+      </label>
+    </div>
+
+    <main class="grid">
       <!-- 1. M5 Max MacBook Pro -->
-      <section class="card" data-type="soon" data-title="M5 Max MacBook Pro">
+      <section class="card" data-type="soon">
         <div class="inner">
           <div class="face front">
             <div class="rank r1"><span class="dot"></span>#1</div>
@@ -153,33 +224,33 @@
           </div>
           <div class="face back">
             <h2>M5 Max MacBook Pro</h2>
-            <div class="soon">Coming soon • early 2026</div>
-            <div class="cta"><button class="btn" data-flip-back>Flip back</button></div>
+            <div class="soon">🚀 Coming early 2026</div>
+            <div class="cta"><button class="btn" data-flip-back>⬅️ Flip back</button></div>
           </div>
         </div>
       </section>
 
-      <!-- 2. iPhone 17 Pro Max 512 GB (Orange) -->
-      <section class="card" data-type="link" data-link="https://www.apple.com/shop/buy-iphone/iphone-17-pro/6.9-inch-display-512gb-cosmic-orange-att" data-title="iPhone 17 Pro Max 512 GB (Orange)">
+      <!-- 2. iPhone 17 Pro Max -->
+      <section class="card">
         <div class="inner">
           <div class="face front">
             <div class="rank r2"><span class="dot"></span>#2</div>
-            <h2>iPhone 17 Pro Max 512&nbsp;GB (Orange)</h2>
-            <div class="art"><img src="https://directunlocks.com/devices/compressed/iphone-17-pro.png?v=6" alt="iPhone 17 Pro Max 512 GB Orange"></div>
+            <h2>iPhone 17 Pro Max 512 GB (Orange)</h2>
+            <div class="art"><img src="https://directunlocks.com/devices/compressed/iphone-17-pro.png?v=6" alt="iPhone 17 Pro Max"></div>
           </div>
           <div class="face back">
             <h2>iPhone 17 Pro Max</h2>
             <div class="meta"><div class="price">$1,399.99</div></div>
             <div class="cta">
-              <a class="btn" href="https://www.apple.com/shop/buy-iphone/iphone-17-pro/6.9-inch-display-512gb-cosmic-orange-att" target="_blank" rel="noopener">Open Apple link</a>
-              <button class="btn" data-flip-back>Flip back</button>
+              <a class="btn" href="https://www.apple.com/shop/buy-iphone/iphone-17-pro/6.9-inch-display-512gb-cosmic-orange-att" target="_blank" rel="noopener">🛒 Buy Now</a>
+              <button class="btn" data-flip-back>⬅️ Back</button>
             </div>
           </div>
         </div>
       </section>
 
       <!-- 3. AirPods Pro 3 -->
-      <section class="card" data-type="link" data-link="https://www.apple.com/shop/buy-airpods/airpods-pro-3" data-title="AirPods Pro 3">
+      <section class="card">
         <div class="inner">
           <div class="face front">
             <div class="rank r3"><span class="dot"></span>#3</div>
@@ -190,138 +261,149 @@
             <h2>AirPods Pro 3</h2>
             <div class="meta"><div class="price">$249.00</div></div>
             <div class="cta">
-              <a class="btn" href="https://www.apple.com/shop/buy-airpods/airpods-pro-3" target="_blank" rel="noopener">Open Apple link</a>
-              <button class="btn" data-flip-back>Flip back</button>
+              <a class="btn" href="https://www.apple.com/shop/buy-airpods/airpods-pro-3" target="_blank" rel="noopener">🛒 Buy Now</a>
+              <button class="btn" data-flip-back>⬅️ Back</button>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- 4. 27" 4K 144Hz Monitor -->
-      <section class="card" data-type="link" data-link="https://www.newegg.com/lxz-lx270zg-27-4k-uhd-144-hz-ips-black/p/3D4-008H-00005" data-title="27&quot; 4K 144Hz Monitor">
+      <!-- 4. Monitor -->
+      <section class="card">
         <div class="inner">
           <div class="face front">
             <div class="rank r4"><span class="dot"></span>#4</div>
-            <h2>27&quot; 4K 144Hz Monitor</h2>
-            <div class="art">
-              <img id="monImg" src="monitor.png" alt="27-inch 4K 144Hz monitor">
-            </div>
+            <h2>27" 4K 144Hz Monitor</h2>
+            <div class="art"><img id="monImg" src="monitor.png" alt="27-inch 4K Monitor"></div>
           </div>
           <div class="face back">
-            <h2>27&quot; 4K 144Hz Monitor</h2>
+            <h2>27" 4K 144Hz Monitor</h2>
             <div class="meta"><div class="price">$229.00</div></div>
             <div class="cta">
-              <a class="btn" href="https://www.newegg.com/lxz-lx270zg-27-4k-uhd-144-hz-ips-black/p/3D4-008H-00005" target="_blank" rel="noopener">Open product link</a>
-              <button class="btn" data-flip-back>Flip back</button>
+              <a class="btn" href="https://www.newegg.com/lxz-lx270zg-27-4k-uhd-144-hz-ips-black/p/3D4-008H-00005" target="_blank" rel="noopener">🛒 Buy Now</a>
+              <button class="btn" data-flip-back>⬅️ Back</button>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- 5. Webcam ($129) -->
-      <section class="card" data-type="link" data-link="https://a.co/d/e9CLvcx" data-title="Webcam">
+      <!-- 5. Webcam -->
+      <section class="card">
         <div class="inner">
           <div class="face front">
             <div class="rank r5"><span class="dot"></span>#5</div>
             <h2>Webcam</h2>
-            <div class="art"><img src="https://cdn.shopify.com/s/files/1/0054/9466/9382/files/c606a6b460f944b4a834.webp?v=1725464276" alt="Webcam image"></div>
+            <div class="art"><img src="https://cdn.shopify.com/s/files/1/0054/9466/9382/files/c606a6b460f944b4a834.webp?v=1725464276" alt="Webcam"></div>
           </div>
           <div class="face back">
             <h2>Webcam</h2>
             <div class="meta"><div class="price">$129.00</div></div>
             <div class="cta">
-              <a class="btn" href="https://a.co/d/e9CLvcx" target="_blank" rel="noopener">Open product link</a>
-              <button class="btn" data-flip-back>Flip back</button>
+              <a class="btn" href="https://a.co/d/e9CLvcx" target="_blank" rel="noopener">🛒 Buy Now</a>
+              <button class="btn" data-flip-back>⬅️ Back</button>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- 6. Eilish No.2 Mini Duo Gift Set ($24) -->
-      <section class="card" data-type="link" data-link="https://www.ulta.com/p/eilish-eilish-no-2-mini-duo-gift-set-pimprod2041690" data-title="Eilish No.2 Mini Duo Gift Set">
+      <!-- 6. Eilish Perfume -->
+      <section class="card">
         <div class="inner">
           <div class="face front">
             <div class="rank r6"><span class="dot"></span>#6</div>
             <h2>Eilish No.2 Mini Duo Gift Set</h2>
-            <div class="art"><img src="https://media.ulta.com/i/ulta/2616165?w=400&h=400&fmt=auto" alt="Eilish No.2 Mini Duo Gift Set"></div>
+            <div class="art"><img src="https://media.ulta.com/i/ulta/2616165?w=400&h=400&fmt=auto" alt="Eilish perfume"></div>
           </div>
           <div class="face back">
-            <h2>Eilish No.2 Mini Duo Gift Set</h2>
+            <h2>Eilish No.2 Mini Duo</h2>
             <div class="meta"><div class="price">$24.00</div></div>
             <div class="cta">
-              <a class="btn" href="https://www.ulta.com/p/eilish-eilish-no-2-mini-duo-gift-set-pimprod2041690" target="_blank" rel="noopener">Open product link</a>
-              <button class="btn" data-flip-back>Flip back</button>
+              <a class="btn" href="https://www.ulta.com/p/eilish-eilish-no-2-mini-duo-gift-set-pimprod2041690" target="_blank" rel="noopener">🛒 Buy Now</a>
+              <button class="btn" data-flip-back>⬅️ Back</button>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- 7. Alani Nu Energy Drink Variety Pack (18-ct) -->
-      <section class="card" data-type="multi" data-title="Alani Nu Energy Drink, Variety Pack, 18-count">
+      <!-- 7. Alani Nu -->
+      <section class="card" data-type="multi">
         <div class="inner">
           <div class="face front">
             <div class="rank r7"><span class="dot"></span>#7</div>
-            <h2>Alani Nu Energy Drink (18‑ct)</h2>
-            <div class="art"><img src="https://bfasset.costco-static.com/U447IH35/as/xfv98tr9k7gxpz7x3s24kkm/1942590__2?auto=webp&amp;format=jpg&amp;width=600&amp;height=600&amp;fit=bounds&amp;canvas=600,600" alt="Alani Nu Energy Drink Variety Pack 18 count"></div>
+            <h2>Alani Nu Energy Drink (18-ct)</h2>
+            <div class="art"><img src="https://bfasset.costco-static.com/U447IH35/as/xfv98tr9k7gxpz7x3s24kkm/1942590__2?auto=webp&format=jpg&width=600&height=600&fit=bounds&canvas=600,600" alt="Alani Nu"></div>
           </div>
           <div class="face back">
-            <h2>Alani Nu Energy Drink (18‑ct)</h2>
+            <h2>Alani Nu Energy (18-ct)</h2>
             <div class="meta"><div class="price">$27.00</div></div>
             <div class="cta">
-              <button class="btn" data-open-retailer>Choose store</button>
-              <button class="btn" data-flip-back>Flip back</button>
+              <button class="btn" data-open-retailer>🏪 Choose Store</button>
+              <button class="btn" data-flip-back>⬅️ Back</button>
             </div>
           </div>
         </div>
       </section>
-      
-      <!-- 8. Team Group MP33 2TB NVMe SSD -->
-      <section class="card" data-type="link" data-link="https://www.newegg.com/team-group-2tb-mp33-nvme-1-3/p/N82E16820331431" data-title="Team Group MP33 2TB NVMe SSD">
+
+      <!-- 8. SSD -->
+      <section class="card">
         <div class="inner">
           <div class="face front">
             <div class="rank r8"><span class="dot"></span>#8</div>
             <h2>Team Group MP33 2TB NVMe SSD</h2>
-            <div class="art"><img src="https://c1.neweggimages.com/productimage/nb1280/20-331-431-01.jpg" alt="Team Group MP33 2TB NVMe SSD"></div>
+            <div class="art"><img src="https://c1.neweggimages.com/productimage/nb1280/20-331-431-01.jpg" alt="Team Group SSD"></div>
           </div>
           <div class="face back">
-            <h2>Team Group MP33 2TB NVMe SSD</h2>
+            <h2>Team Group MP33 2TB SSD</h2>
             <div class="meta"><div class="price">$113.99</div></div>
             <div class="cta">
-              <a class="btn" href="https://www.newegg.com/team-group-2tb-mp33-nvme-1-3/p/N82E16820331431" target="_blank" rel="noopener">Open Newegg link</a>
-              <button class="btn" data-flip-back>Flip back</button>
+              <a class="btn" href="https://www.newegg.com/team-group-2tb-mp33-nvme-1-3/p/N82E16820331431" target="_blank" rel="noopener">🛒 Buy Now</a>
+              <button class="btn" data-flip-back>⬅️ Back</button>
             </div>
           </div>
         </div>
       </section>
-    
     </main>
 
-    <footer>Tap to flip • No tracking • Built for GitHub Pages</footer>
+    <footer>Made with ❤️ for Christmas 2025 • No tracking • Tap cards to flip!</footer>
   </div>
 
   <!-- Retailer modal -->
-  <div class="modal" id="retailerModal" role="dialog" aria-modal="true" aria-label="Choose store">
+  <div class="modal" id="retailerModal">
     <div class="sheet">
-      <h3>Choose retailer</h3>
+      <h3>🏪 Choose Your Store</h3>
       <div class="row">
         <a class="btn" href="https://www.costco.com/p/-/alani-nu-energy-drink-variety-pack-12-fl-oz-18-count/4000269836?langId=-1" target="_blank" rel="noopener">Costco</a>
-        <a class="btn" href="https://www.samsclub.com/ip/alani-nu-energy-drink-variety-pack-12-fl-oz-18pk/15230853923?itemNumber=990386544" target="_blank" rel="noopener">Sam’s Club</a>
+        <a class="btn" href="https://www.samsclub.com/ip/alani-nu-energy-drink-variety-pack-12-fl-oz-18pk/15230853923?itemNumber=990386544" target="_blank" rel="noopener">Sam's Club</a>
       </div>
       <button class="btn close" data-close-modal>Close</button>
     </div>
   </div>
 
-  <div class="hint" id="hint">Tip: tap a card to flip</div>
+  <div class="hint" id="hint">👆 Tap a card to flip it!</div>
 
   <script>
-    // Sparkle follows cursor/touch
+    // Christmas Countdown
+    function updateCountdown(){
+      const xmas = new Date('2025-12-25T00:00:00');
+      const now = new Date();
+      const diff = xmas - now;
+      if(diff <= 0){ document.getElementById('countdown').textContent = "🎉 IT'S CHRISTMAS! 🎄"; return; }
+      const days = Math.floor(diff / (1000*60*60*24));
+      const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+      const mins = Math.floor((diff % (1000*60*60)) / (1000*60));
+      const secs = Math.floor((diff % (1000*60)) / 1000);
+      document.getElementById('countdown').textContent = `${days}d ${hours}h ${mins}m ${secs}s`;
+    }
+    updateCountdown(); setInterval(updateCountdown, 1000);
+
+    // Sparkle follows cursor
     const sparkle = document.querySelector('.sparkle');
-    function setSparkle(x, y){ sparkle.style.setProperty('--x', x + 'px'); sparkle.style.setProperty('--y', y + 'px'); }
-    function moveSparkle(e){ const x = e.touches ? e.touches[0].clientX : e.clientX; const y = e.touches ? e.touches[0].clientY : e.clientY; setSparkle(x, y); }
+    function setSparkle(x, y){ sparkle.style.setProperty('--x', x+'px'); sparkle.style.setProperty('--y', y+'px'); }
+    function moveSparkle(e){ const x = e.touches ? e.touches[0].clientX : e.clientX; const y = e.touches ? e.touches[0].clientY : e.clientY; setSparkle(x,y); }
     document.addEventListener('pointermove', moveSparkle, {passive:true});
     document.addEventListener('touchmove', moveSparkle, {passive:true});
 
-    // Snow generation
+    // Snow
     const snowWrap = document.getElementById('snow');
     const snowToggle = document.getElementById('snowToggle');
     function makeSnow(){
@@ -329,8 +411,8 @@
       const count = 90, W = window.innerWidth;
       for(let i=0;i<count;i++){
         const f = document.createElement('span'); f.className = 'flake';
-        const size = Math.random()*2.4 + 1.1, left = Math.random()*W, delay = Math.random()*6, dur = Math.random()*10 + 9;
-        const drift = (Math.random()*140 - 70) + 'px';
+        const size = Math.random()*2.4+1.1, left = Math.random()*W, delay = Math.random()*6, dur = Math.random()*10+9;
+        const drift = (Math.random()*140-70)+'px';
         Object.assign(f.style, {width:size+'px', height:size+'px', left:left+'px', animationDuration:dur+'s', animationDelay:delay+'s'});
         f.style.setProperty('--drift', drift); snowWrap.appendChild(f);
       }
@@ -338,40 +420,80 @@
     function toggleSnow(){ snowWrap.style.display = snowToggle.checked ? 'block' : 'none'; }
     makeSnow(); toggleSnow(); window.addEventListener('resize', makeSnow); snowToggle.addEventListener('change', toggleSnow);
 
-    // Tap burst
-    const burst = document.getElementById('burst');
-    function makeBurst(x,y){ for(let i=0;i<10;i++){ const s = document.createElement('i'); s.style.left = x+'px'; s.style.top=y+'px'; const tx=(Math.random()*140-70)+'px', ty=(Math.random()*140-70)+'px'; s.style.setProperty('--tx',tx); s.style.setProperty('--ty',ty); burst.appendChild(s); s.addEventListener('animationend',()=>s.remove()); }}
-    document.addEventListener('pointerdown', e=>{ makeBurst(e.clientX,e.clientY); hideHint(); }, {passive:true});
+    // Confetti burst
+    const confettiWrap = document.getElementById('confetti');
+    const colors = ['#ff3355','#15e18c','#ffd463','#7aa6ff','#b07bff','#68e8ff','#ff87c5'];
+    function makeConfetti(x,y){
+      for(let i=0;i<25;i++){
+        const c = document.createElement('div'); c.className = 'confetto';
+        c.style.left = x+'px'; c.style.top = y+'px';
+        c.style.background = colors[Math.floor(Math.random()*colors.length)];
+        const drift = (Math.random()*300-150)+'px';
+        const delay = Math.random()*0.1;
+        c.style.setProperty('--drift', drift);
+        c.style.animationDelay = delay+'s';
+        confettiWrap.appendChild(c);
+        setTimeout(()=>c.remove(), 2100);
+      }
+    }
 
-    // Flip + chime
+    // Sound
     const soundToggle = document.getElementById('soundToggle'); let audioCtx=null;
-    function playChime(){ if(!soundToggle.checked) return; if(!audioCtx) audioCtx = new (window.AudioContext||window.webkitAudioContext)(); const now=audioCtx.currentTime; const o=audioCtx.createOscillator(), g=audioCtx.createGain(); o.type='sine'; o.frequency.setValueAtTime(880,now); g.gain.setValueAtTime(0.001,now); g.gain.exponentialRampToValueAtTime(0.12,now+0.02); g.gain.exponentialRampToValueAtTime(0.0001,now+0.35); o.connect(g).connect(audioCtx.destination); o.start(); o.stop(now+0.36); const o2=audioCtx.createOscillator(), g2=audioCtx.createGain(); o2.type='sine'; o2.frequency.setValueAtTime(1175,now+0.05); g2.gain.setValueAtTime(0.001,now+0.05); g2.gain.exponentialRampToValueAtTime(0.12,now+0.08); g2.gain.exponentialRampToValueAtTime(0.0001,now+0.42); o2.connect(g2).connect(audioCtx.destination); o2.start(now+0.05); o2.stop(now+0.45); }
+    function playChime(){ 
+      if(!soundToggle.checked) return; 
+      if(!audioCtx) audioCtx = new (window.AudioContext||window.webkitAudioContext)(); 
+      const now=audioCtx.currentTime; 
+      const o=audioCtx.createOscillator(), g=audioCtx.createGain(); 
+      o.type='sine'; o.frequency.setValueAtTime(880,now); 
+      g.gain.setValueAtTime(0.001,now); 
+      g.gain.exponentialRampToValueAtTime(0.12,now+0.02); 
+      g.gain.exponentialRampToValueAtTime(0.0001,now+0.35); 
+      o.connect(g).connect(audioCtx.destination); o.start(); o.stop(now+0.36); 
+      const o2=audioCtx.createOscillator(), g2=audioCtx.createGain(); 
+      o2.type='sine'; o2.frequency.setValueAtTime(1175,now+0.05); 
+      g2.gain.setValueAtTime(0.001,now+0.05); 
+      g2.gain.exponentialRampToValueAtTime(0.12,now+0.08); 
+      g2.gain.exponentialRampToValueAtTime(0.0001,now+0.42); 
+      o2.connect(g2).connect(audioCtx.destination); o2.start(now+0.05); o2.stop(now+0.45); 
+    }
 
+    // Card flipping
     document.querySelectorAll('.card').forEach(card=>{
       const flipBackBtns = card.querySelectorAll('[data-flip-back]');
-      card.addEventListener('click', e=>{ if(e.target.closest('a')) return; card.classList.toggle('flipped'); playChime(); });
+      card.addEventListener('click', e=>{
+        if(e.target.closest('a')) return;
+        if(e.target.closest('[data-flip-back]')) return;
+        if(e.target.closest('[data-open-retailer]')) return;
+        card.classList.toggle('flipped');
+        playChime();
+        if(card.classList.contains('flipped')){
+          const rect = card.getBoundingClientRect();
+          makeConfetti(rect.left + rect.width/2, rect.top + rect.height/2);
+        }
+        hideHint();
+      });
       flipBackBtns.forEach(b=> b.addEventListener('click', e=>{ e.stopPropagation(); card.classList.remove('flipped'); }));
     });
 
     // Glow toggle
     const sparkleToggle = document.getElementById('sparkleToggle');
-    function toggleSparkle(){ document.querySelector('.sparkle').style.display = sparkleToggle.checked ? 'block' : 'none'; }
+    function toggleSparkle(){ sparkle.style.display = sparkleToggle.checked ? 'block' : 'none'; }
     sparkleToggle.addEventListener('change', toggleSparkle); toggleSparkle();
 
-    // Retailer modal controls
+    // Modal
     const retailerModal = document.getElementById('retailerModal');
     document.addEventListener('click', (e)=>{
       const openBtn = e.target.closest('[data-open-retailer]');
       const closeBtn = e.target.closest('[data-close-modal]');
-      if(openBtn){ retailerModal.classList.add('open'); }
+      if(openBtn){ e.stopPropagation(); retailerModal.classList.add('open'); }
       if(closeBtn || (e.target === retailerModal)){ retailerModal.classList.remove('open'); }
     });
 
-    // Monitor image fallback chain
+    // Monitor fallback
     document.addEventListener('DOMContentLoaded', ()=>{
       const monImg = document.getElementById('monImg');
       if(!monImg) return;
-      const fallbacks = [ 'monitor.png', 'image-removebg-preview (2).png' ];
+      const fallbacks = ['monitor.png', 'image-removebg-preview (2).png'];
       let i = 0;
       const tryNext = ()=>{
         if(i >= fallbacks.length){
@@ -383,10 +505,10 @@
       monImg.onerror = tryNext; if(!monImg.complete || monImg.naturalWidth === 0) tryNext();
     });
 
-    // Hide tap hint
+    // Hide hint
     const hint = document.getElementById('hint');
     function hideHint(){ if(hint){ hint.style.opacity='0'; setTimeout(()=>hint.remove(), 500); } }
+    setTimeout(hideHint, 5000);
   </script>
-  <noscript>This page uses a little JavaScript for the flip effect and snow. Enable JS if you want the animations.</noscript>
 </body>
 </html>
