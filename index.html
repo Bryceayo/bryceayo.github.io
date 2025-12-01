@@ -5,593 +5,994 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
   <title>Jett's Christmas List 2025 🎄</title>
   <meta name="description" content="Festive wish list with animations and interactive surprises!" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#07090c; --bg2:#0c0f15; --text:#eef1f5; --muted:#a7b0bd;
-      --red:#ff3355; --green:#15e18c; --gold:#ffd463; --blue:#7aa6ff; --purple:#b07bff;
-      --stroke:rgba(255,255,255,.12); --shadow:0 18px 40px rgba(0,0,0,.45);
-      --radius:20px; --maxw:980px;
+    :root {
+      --bg: #0a0c12;
+      --bg2: #12151d;
+      --card-bg: rgba(255,255,255,0.03);
+      --card-border: rgba(255,255,255,0.08);
+      --text: #f4f6f9;
+      --muted: #8a95a8;
+      --red: #ff4466;
+      --green: #22e8a0;
+      --gold: #ffc857;
+      --blue: #6eb5ff;
+      --purple: #c084fc;
+      --pink: #ff6b9d;
+      --cyan: #22d3ee;
+      --radius: 24px;
+      --radius-sm: 16px;
+      --shadow: 0 24px 64px rgba(0,0,0,0.5);
+      --glow: 0 0 80px;
     }
-    *{box-sizing:border-box; -webkit-tap-highlight-color:transparent}
-    html,body{height:100%; overflow-x:hidden}
-    body{margin:0; font:16px/1.45 Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; color:var(--text);
-      background:
-        radial-gradient(1200px 800px at 100% -10%, rgba(255,51,85,.16), transparent 40%),
-        radial-gradient(1000px 700px at 0% 110%, rgba(21,225,140,.14), transparent 40%),
-        linear-gradient(180deg, var(--bg2), var(--bg));}
 
-    /* Moving background glow */
-    .bgfloat{position:fixed; inset:-25vmax; pointer-events:none; z-index:-1;
-      background:
-        radial-gradient(60vmax 60vmax at 18% 20%, rgba(255,51,85,.16), transparent 55%),
-        radial-gradient(65vmax 65vmax at 82% 82%, rgba(21,225,140,.14), transparent 55%),
-        conic-gradient(from 0deg, rgba(255,51,85,.14), rgba(255,212,99,.14), rgba(27,217,123,.14), transparent 60%);
-      filter:blur(22px);
-      animation:spin 60s linear infinite, bob 24s ease-in-out infinite alternate; transform-origin:50% 50%;}
-    @keyframes spin{to{transform:rotate(360deg)}}
-    @keyframes bob{0%{transform:translateY(-2vmax)}100%{transform:translateY(2vmax)}}
-
-    .wrap{max-width:var(--maxw); margin:auto; padding:16px 12px 60px; position:relative}
-
-    /* Countdown banner */
-    .countdown{background:linear-gradient(135deg, rgba(255,51,85,.18), rgba(21,225,140,.15)); 
-      border:1px solid var(--stroke); border-radius:16px; padding:16px; margin:16px 0 20px;
-      text-align:center; box-shadow:0 8px 32px rgba(0,0,0,.35)}
-    .countdown-title{font-size:13px; color:var(--muted); margin-bottom:6px; font-weight:600}
-    .countdown-timer{font-size:32px; font-weight:900; 
-      background:linear-gradient(135deg, var(--red), var(--gold), var(--green)); 
-      -webkit-background-clip:text; background-clip:text; color:transparent;
-      text-shadow:0 0 20px rgba(255,212,99,.5); letter-spacing:2px}
-
-    header{text-align:center; margin:12px 0 24px}
-    h1{margin:0 0 8px; font-weight:900; letter-spacing:.3px; font-size:clamp(28px,6vw,42px);
-      background:conic-gradient(from 10deg, #fff, var(--gold), #fff); -webkit-background-clip:text; background-clip:text; color:transparent;
-      text-shadow:0 0 24px rgba(255,212,99,.45), 0 0 40px rgba(255,51,85,.35);
-      animation:glow 3s ease-in-out infinite}
-    @keyframes glow{0%,100%{filter:brightness(1)}50%{filter:brightness(1.2)}}
-    .sub{color:var(--muted); font-size:14px; margin-bottom:16px}
-
-    .controls{display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-bottom:20px}
-    .pill{display:inline-flex; align-items:center; gap:8px; border:1px solid var(--stroke); 
-      background:rgba(255,255,255,.06); padding:10px 16px; border-radius:999px; 
-      box-shadow:0 2px 10px rgba(0,0,0,.25); font-size:14px; font-weight:600;
-      transition:all .2s ease; cursor:pointer}
-    .pill:active{transform:scale(.95)}
-
-    /* Toggle slider */
-    .toggle{appearance:none; width:42px; height:24px; position:relative; border-radius:999px; outline:none; cursor:pointer;
-      background:linear-gradient(180deg, #0f1420, #0a0f18); border:1px solid var(--stroke); box-shadow:inset 0 1px 0 rgba(255,255,255,.06), inset 0 -8px 16px rgba(0,0,0,.35);
-      transition:background .3s ease}
-    .toggle:before{content:""; position:absolute; top:2px; left:2px; width:20px; height:20px; border-radius:50%; background:#fff; box-shadow:0 2px 8px rgba(0,0,0,.35); transition:transform .3s cubic-bezier(.4,0,.2,1)}
-    .toggle:checked{background:linear-gradient(90deg, rgba(255,51,85,.65), rgba(21,225,140,.65))}
-    .toggle:checked:before{transform:translateX(18px)}
-
-    /* Grid - IMPROVED MOBILE */
-    .grid{display:grid; gap:16px; padding:0 4px}
-    @media(min-width:720px){.grid{grid-template-columns:repeat(3,1fr); gap:18px}}
-    @media(max-width:719px){.grid{gap:20px}}
-
-    .card{position:relative; perspective:1400px; cursor:pointer}
-    .card:active{transform:scale(.98)}
-    .inner{position:relative; border:1px solid var(--stroke); border-radius:var(--radius); 
-      background:linear-gradient(145deg, rgba(255,255,255,.06), rgba(255,255,255,.03)); 
-      box-shadow:var(--shadow); 
-      transform-style:preserve-3d; 
-      -webkit-transform-style:preserve-3d;
-      transition:transform .7s cubic-bezier(.2,.7,.2,1), box-shadow .3s ease;
-      transform:translateZ(0);
-      -webkit-transform:translateZ(0)}
-    .card:hover .inner{box-shadow:0 20px 50px rgba(0,0,0,.55)}
-    .card.flipped .inner{
-      transform:rotateY(180deg);
-      -webkit-transform:rotateY(180deg)}
-
-    /* Safari mobile fix for backface visibility */
-    .face{position:relative; min-height:340px; padding:18px; border-radius:var(--radius); 
-      display:flex; flex-direction:column; align-items:center; justify-content:center; 
-      backface-visibility:hidden;
-      -webkit-backface-visibility:hidden;
-      transform:translateZ(0);
-      -webkit-transform:translateZ(0)}
-    @media(max-width:719px){.face{min-height:380px; padding:20px}}
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html, body { height: 100%; overflow-x: hidden; }
     
-    .front{
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      z-index:2;
-      transform:rotateY(0deg);
-      -webkit-transform:rotateY(0deg)}
+    body {
+      margin: 0;
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    /* Ambient background */
+    .ambient {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+    .ambient::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: 
+        radial-gradient(ellipse 600px 400px at 20% 20%, rgba(255,68,102,0.12), transparent),
+        radial-gradient(ellipse 500px 500px at 80% 80%, rgba(34,232,160,0.08), transparent),
+        radial-gradient(ellipse 400px 400px at 60% 30%, rgba(255,200,87,0.06), transparent);
+      animation: drift 30s ease-in-out infinite alternate;
+    }
+    @keyframes drift {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      100% { transform: translate(-5%, 5%) rotate(10deg); }
+    }
+
+    /* Snow */
+    .snow {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 100;
+    }
+    .flake {
+      position: absolute;
+      top: -10px;
+      width: 4px;
+      height: 4px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.7;
+      filter: blur(0.5px);
+      animation: snowfall linear infinite;
+    }
+    @keyframes snowfall {
+      to { transform: translateY(110vh) translateX(var(--drift)); opacity: 0; }
+    }
+
+    /* Sparkle cursor */
+    .sparkle {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(500px circle at var(--x, 50%) var(--y, 50%), rgba(255,200,87,0.08), transparent 40%);
+      mix-blend-mode: screen;
+      transition: opacity 0.3s;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px 16px 80px;
+    }
+
+    /* Countdown */
+    .countdown {
+      background: linear-gradient(135deg, rgba(255,68,102,0.15), rgba(34,232,160,0.1));
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      margin-bottom: 32px;
+      text-align: center;
+      backdrop-filter: blur(20px);
+    }
+    .countdown-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+    .countdown-timer {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 8vw, 42px);
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--red), var(--gold), var(--green));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 40px rgba(255,200,87,0.3);
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 9vw, 56px);
+      font-weight: 900;
+      margin: 0 0 12px;
+      background: linear-gradient(135deg, #fff 20%, var(--gold) 50%, #fff 80%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+    @keyframes shimmer {
+      0%, 100% { background-position: 0% center; }
+      50% { background-position: 200% center; }
+    }
+    .tagline {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    /* Controls */
+    .controls {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+    }
+    .toggle-pill {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 999px;
+      padding: 10px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .toggle-pill:hover { border-color: rgba(255,255,255,0.15); }
+    .toggle-pill:active { transform: scale(0.96); }
     
-    .back{
-      position:absolute; 
-      inset:0; 
-      transform:rotateY(180deg); 
-      -webkit-transform:rotateY(180deg);
-      background:linear-gradient(180deg, rgba(0,0,0,.3), rgba(255,255,255,.04));
-      z-index:1}
+    .switch {
+      appearance: none;
+      width: 40px;
+      height: 22px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 999px;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .switch::before {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 18px;
+      height: 18px;
+      background: white;
+      border-radius: 50%;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    .switch:checked {
+      background: linear-gradient(135deg, var(--red), var(--green));
+    }
+    .switch:checked::before {
+      transform: translateX(18px);
+    }
 
-    /* Hide images and content on the opposite face for Safari */
-    .card:not(.flipped) .back *{
-      visibility:hidden;
-      opacity:0}
-    .card.flipped .front *{
-      visibility:hidden;
-      opacity:0}
+    /* Grid */
+    .grid {
+      display: grid;
+      gap: 20px;
+    }
+    @media (min-width: 600px) {
+      .grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    }
+    @media (min-width: 900px) {
+      .grid { grid-template-columns: repeat(3, 1fr); }
+    }
 
-    .rank{position:absolute; top:14px; left:14px; font-weight:800; font-size:15px; 
-      background:rgba(0,0,0,.65); border:1px solid rgba(255,255,255,.25); 
-      padding:8px 14px; border-radius:999px; letter-spacing:.5px;
-      box-shadow:0 4px 16px rgba(0,0,0,.4)}
-    .rank .dot{display:inline-block; width:7px; height:7px; border-radius:50%; margin-right:8px; 
-      background:var(--red); box-shadow:0 0 12px var(--red); animation:pulse 2s ease-in-out infinite}
-    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
-    .rank.r2 .dot{background:var(--green); box-shadow:0 0 12px var(--green)}
-    .rank.r3 .dot{background:var(--blue); box-shadow:0 0 12px var(--blue)}
-    .rank.r4 .dot{background:var(--gold); box-shadow:0 0 12px var(--gold)}
-    .rank.r5 .dot{background:var(--purple); box-shadow:0 0 12px var(--purple)}
-    .rank.r6 .dot{background:#68e8ff; box-shadow:0 0 12px #68e8ff}
-    .rank.r7 .dot{background:#ff87c5; box-shadow:0 0 12px #ff87c5}
-    .rank.r8 .dot{background:#c0ff72; box-shadow:0 0 12px #c0ff72}
-    .rank.r9 .dot{background:#ff6b9d; box-shadow:0 0 12px #ff6b9d}
-
-    h2{margin:12px 0 14px; font-size:clamp(17px,4vw,20px); font-weight:800; text-align:center; line-height:1.3}
-    .art{display:flex; align-items:center; justify-content:center; width:100%; max-width:520px; 
-      background:rgba(0,0,0,.35); border:1px solid rgba(255,255,255,.06); border-radius:16px; 
-      padding:16px; min-height:220px; position:relative; overflow:hidden;
-      backface-visibility:hidden;
-      -webkit-backface-visibility:hidden}
-    @media(max-width:719px){.art{min-height:240px; padding:20px}}
-    .art img{max-width:100%; max-height:280px; object-fit:contain; 
-      filter:drop-shadow(0 20px 24px rgba(0,0,0,.4)); transition:transform .3s ease;
-      backface-visibility:hidden;
-      -webkit-backface-visibility:hidden}
-    .card:hover .art img{transform:scale(1.05)}
-    .art .ph{width:100%; min-height:180px; display:flex; align-items:center; justify-content:center; 
-      color:var(--muted); border:1px dashed var(--stroke); border-radius:12px; padding:16px; 
-      font-weight:700; letter-spacing:.3px}
-
-    /* Hoodie hover effect */
-    .hoodie-container{position:relative; width:100%; height:100%; display:flex; align-items:center; justify-content:center;}
-    .hoodie-img{position:absolute; max-width:100%; max-height:280px; object-fit:contain; 
-      filter:drop-shadow(0 20px 24px rgba(0,0,0,.4)); transition:opacity .4s ease, transform .3s ease;
-      backface-visibility:hidden;
-      -webkit-backface-visibility:hidden}
-    .hoodie-front{opacity:1; z-index:2;}
-    .hoodie-back{opacity:0; z-index:1;}
-    .card:hover .hoodie-front{opacity:0;}
-    .card:hover .hoodie-back{opacity:1; transform:scale(1.05);}
+    /* Cards */
+    .card {
+      position: relative;
+      perspective: 1500px;
+      cursor: pointer;
+      min-height: 420px;
+    }
+    @media (max-width: 599px) {
+      .card { min-height: 440px; }
+    }
     
-    .back .meta{margin-top:8px; text-align:center}
-    .price{font-weight:800; font-size:clamp(18px,4vw,22px); color:#fff; letter-spacing:.2px; 
-      text-shadow:0 0 12px rgba(255,255,255,.3); margin-bottom:4px}
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: inherit;
+      transform-style: preserve-3d;
+      -webkit-transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .card.flipped .card-inner {
+      transform: rotateY(180deg);
+      -webkit-transform: rotateY(180deg);
+    }
 
-    .back .cta{display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top:14px}
-    @media(max-width:719px){.back .cta{flex-direction:column; gap:10px}}
-    .btn{appearance:none; border:1px solid var(--stroke); color:#fff; 
-      background:linear-gradient(180deg, rgba(255,255,255,.1), rgba(255,255,255,.05)); 
-      padding:14px 20px; border-radius:14px; cursor:pointer; text-decoration:none; 
-      font-weight:700; font-size:15px; transition:all .2s ease; 
-      box-shadow:0 4px 12px rgba(0,0,0,.25); white-space:nowrap}
-    .btn:hover{border-color:rgba(255,255,255,.3); background:linear-gradient(180deg, rgba(255,255,255,.15), rgba(255,255,255,.08)); transform:translateY(-2px)}
-    .btn:active{transform:scale(.96)}
-    @media(max-width:719px){.btn{padding:16px 24px; font-size:16px; width:100%}}
-    .soon{font-weight:800; font-size:clamp(16px,4vw,18px); color:var(--gold); 
-      text-shadow:0 0 14px rgba(255,212,99,.6); animation:shimmer 2s ease-in-out infinite}
-    @keyframes shimmer{0%,100%{opacity:1}50%{opacity:.7}}
+    .card-face {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: var(--radius);
+      border: 1px solid var(--card-border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      backdrop-filter: blur(20px);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow: hidden;
+    }
+    .card-front {
+      z-index: 2;
+    }
+    .card-back {
+      transform: rotateY(180deg);
+      -webkit-transform: rotateY(180deg);
+      background: linear-gradient(180deg, rgba(0,0,0,0.4), rgba(255,255,255,0.03));
+      justify-content: center;
+    }
 
-    /* Sparkle + snow */
-    .sparkle{position:fixed; inset:0; pointer-events:none; background:
-      radial-gradient(400px 400px at var(--x,50%) var(--y,50%), rgba(255,212,99,.2), transparent 40%),
-      radial-gradient(550px 550px at calc(var(--x,50%)+80px) calc(var(--y,50%)+40px), rgba(255,51,85,.14), transparent 45%);
-      transition:transform .1s ease; mix-blend-mode:screen}
+    /* Hide content on opposite face for Safari */
+    .card:not(.flipped) .card-back > * { visibility: hidden; }
+    .card.flipped .card-front > * { visibility: hidden; }
 
-    .snow{position:fixed; inset:0; pointer-events:none; overflow:hidden}
-    .flake{position:absolute; top:-10px; width:3px; height:3px; 
-      background:radial-gradient(circle, #fff 0 40%, transparent 41%); border-radius:50%; opacity:.9; 
-      filter:drop-shadow(0 0 6px rgba(255,255,255,.7)); animation:fall linear infinite}
-    @keyframes fall{to{transform:translateY(110vh) translateX(var(--drift)); opacity:0}}
+    /* Rank badge */
+    .rank {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0,0,0,0.6);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-weight: 700;
+      font-size: 13px;
+      backdrop-filter: blur(10px);
+    }
+    .rank-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(0.9); }
+    }
+    .rank-1 .rank-dot { background: var(--red); box-shadow: var(--glow) rgba(255,68,102,0.5); }
+    .rank-2 .rank-dot { background: var(--green); box-shadow: var(--glow) rgba(34,232,160,0.5); }
+    .rank-3 .rank-dot { background: var(--blue); box-shadow: var(--glow) rgba(110,181,255,0.5); }
+    .rank-4 .rank-dot { background: var(--gold); box-shadow: var(--glow) rgba(255,200,87,0.5); }
+    .rank-5 .rank-dot { background: var(--purple); box-shadow: var(--glow) rgba(192,132,252,0.5); }
+    .rank-6 .rank-dot { background: var(--cyan); box-shadow: var(--glow) rgba(34,211,238,0.5); }
+    .rank-7 .rank-dot { background: var(--pink); box-shadow: var(--glow) rgba(255,107,157,0.5); }
+    .rank-8 .rank-dot { background: #a3e635; box-shadow: var(--glow) rgba(163,230,53,0.5); }
+    .rank-9 .rank-dot { background: #f472b6; box-shadow: var(--glow) rgba(244,114,182,0.5); }
 
-    /* Confetti burst */
-    .confetti{position:fixed; inset:0; pointer-events:none; z-index:100}
-    .confetto{position:absolute; width:8px; height:8px; border-radius:2px; opacity:1;
-      animation:confettiFall 2s cubic-bezier(.25,.46,.45,.94) forwards}
-    @keyframes confettiFall{
-      0%{transform:translateY(0) translateX(0) rotateZ(0deg); opacity:1}
-      100%{transform:translateY(100vh) translateX(var(--drift)) rotateZ(720deg); opacity:0}
+    /* Card title */
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(18px, 5vw, 22px);
+      font-weight: 700;
+      text-align: center;
+      margin: 48px 0 20px;
+      line-height: 1.3;
+    }
+
+    /* Image container */
+    .image-wrap {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      background: rgba(0,0,0,0.3);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .image-wrap::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(255,255,255,0.03), transparent);
+    }
+    .image-wrap img {
+      max-width: 100%;
+      max-height: 220px;
+      object-fit: contain;
+      filter: drop-shadow(0 16px 32px rgba(0,0,0,0.4));
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .card:hover .image-wrap img {
+      transform: scale(1.08) translateY(-4px);
+    }
+
+    /* Hoodie special hover */
+    .hoodie-wrap {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hoodie-wrap img {
+      position: absolute;
+      max-width: 100%;
+      max-height: 220px;
+      object-fit: contain;
+      transition: opacity 0.4s, transform 0.4s;
+    }
+    .hoodie-front { opacity: 1; }
+    .hoodie-back { opacity: 0; }
+    .card:hover .hoodie-front { opacity: 0; }
+    .card:hover .hoodie-back { opacity: 1; transform: scale(1.08); }
+
+    /* Back content */
+    .back-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(20px, 5vw, 26px);
+      font-weight: 700;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    .price {
+      font-size: clamp(24px, 6vw, 32px);
+      font-weight: 700;
+      color: var(--gold);
+      text-shadow: 0 0 20px rgba(255,200,87,0.4);
+      margin-bottom: 8px;
+    }
+    .coming-soon {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--gold);
+      text-shadow: 0 0 20px rgba(255,200,87,0.4);
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+    @keyframes glow {
+      from { opacity: 0.7; }
+      to { opacity: 1; }
+    }
+
+    /* Buttons */
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+      max-width: 280px;
+      margin-top: 20px;
+    }
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 16px 24px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 14px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+      color: white;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      backdrop-filter: blur(10px);
+    }
+    .btn:hover {
+      border-color: rgba(255,255,255,0.3);
+      background: linear-gradient(180deg, rgba(255,255,255,0.15), rgba(255,255,255,0.08));
+      transform: translateY(-2px);
+    }
+    .btn:active { transform: scale(0.97); }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, var(--red), var(--pink));
+      border: none;
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #ff5577, #ff7dad);
     }
 
     /* Modal */
-    .modal{position:fixed; inset:0; display:none; place-items:center; 
-      background:rgba(0,0,0,.6); backdrop-filter:saturate(110%) blur(8px); z-index:50;
-      animation:fadeIn .2s ease}
-    @keyframes fadeIn{from{opacity:0}}
-    .modal.open{display:grid}
-    .sheet{width:min(540px,92vw); background:linear-gradient(180deg, rgba(255,255,255,.1), rgba(255,255,255,.05)); 
-      border:1px solid var(--stroke); border-radius:20px; box-shadow:var(--shadow); padding:24px;
-      animation:slideUp .3s cubic-bezier(.2,.7,.2,1)}
-    @keyframes slideUp{from{transform:translateY(20px); opacity:0}}
-    .sheet h3{margin:0 0 16px; font-size:20px; font-weight:800}
-    .row{display:flex; gap:12px; flex-wrap:wrap}
-    @media(max-width:719px){.row{flex-direction:column}}
-    .sheet .btn{flex:1 1 180px; text-align:center}
-    .sheet .close{margin-top:14px; display:block; width:100%}
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      place-items: center;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(8px);
+      z-index: 200;
+      padding: 20px;
+      animation: fadeIn 0.2s;
+    }
+    @keyframes fadeIn { from { opacity: 0; } }
+    .modal.open { display: grid; }
+    
+    .modal-content {
+      width: 100%;
+      max-width: 400px;
+      background: linear-gradient(180deg, rgba(30,35,50,0.98), rgba(20,24,35,0.98));
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 28px;
+      animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } }
+    
+    .modal-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .modal-btns {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .modal-btns .btn {
+      width: 100%;
+    }
+    .modal-close {
+      margin-top: 16px;
+      opacity: 0.7;
+    }
+    .modal-close:hover { opacity: 1; }
 
-    footer{margin:24px 0 0; text-align:center; color:var(--muted); font-size:13px; padding-bottom:20px}
-    .hint{position:fixed; bottom:20px; left:50%; transform:translateX(-50%); 
-      background:rgba(0,0,0,.7); border:1px solid var(--stroke); padding:12px 20px; 
-      border-radius:999px; font-size:13px; color:#dfe6ef; box-shadow:0 8px 28px rgba(0,0,0,.45);
-      animation:bounce 2s ease-in-out infinite; z-index:10}
-    @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-8px)}}
+    /* Confetti */
+    .confetti-container {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 150;
+    }
+    .confetto {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      animation: confettiDrop 2s ease-out forwards;
+    }
+    @keyframes confettiDrop {
+      0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) translateX(var(--drift)) rotate(720deg); opacity: 0; }
+    }
 
-    @media (prefers-reduced-motion: reduce){ .sparkle,.snow,.bgfloat,.confetti{display:none} .inner{transition:none} }
+    /* Hint */
+    .hint {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.8);
+      border: 1px solid var(--card-border);
+      border-radius: 999px;
+      padding: 14px 24px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      backdrop-filter: blur(10px);
+      animation: float 3s ease-in-out infinite;
+      z-index: 50;
+      white-space: nowrap;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-8px); }
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 48px;
+      padding: 20px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+      .snow, .sparkle, .ambient { display: none; }
+    }
   </style>
 </head>
 <body>
-  <div class="bgfloat" aria-hidden="true"></div>
-  <div class="sparkle" aria-hidden="true"></div>
-  <div class="snow" id="snow" aria-hidden="true"></div>
-  <div class="confetti" id="confetti" aria-hidden="true"></div>
+  <div class="ambient"></div>
+  <div class="snow" id="snow"></div>
+  <div class="sparkle" id="sparkle"></div>
+  <div class="confetti-container" id="confetti"></div>
 
-  <div class="wrap">
-    <!-- Christmas Countdown -->
+  <div class="container">
+    <!-- Countdown -->
     <div class="countdown">
-      <div class="countdown-title">🎄 Christmas Countdown 🎁</div>
+      <div class="countdown-label">🎄 Days Until Christmas 🎁</div>
       <div class="countdown-timer" id="countdown">Loading...</div>
     </div>
 
+    <!-- Header -->
     <header>
-      <h1>🎅 Jett's Christmas List 2025 🎄</h1>
-      <div class="sub">✨ Tap any card to reveal details ✨</div>
+      <h1>Jett's Christmas List</h1>
+      <p class="tagline">✨ Tap any card to see details</p>
     </header>
 
+    <!-- Controls -->
     <div class="controls">
-      <label class="pill" title="Toggle snow">
-        <input type="checkbox" class="toggle" id="snowToggle" checked>
+      <label class="toggle-pill">
+        <input type="checkbox" class="switch" id="snowToggle" checked>
         <span>❄️ Snow</span>
       </label>
-      <label class="pill" title="Toggle glow">
-        <input type="checkbox" class="toggle" id="sparkleToggle" checked>
+      <label class="toggle-pill">
+        <input type="checkbox" class="switch" id="glowToggle" checked>
         <span>✨ Glow</span>
       </label>
-      <label class="pill" title="Toggle sound">
-        <input type="checkbox" class="toggle" id="soundToggle">
-        <span>🔔 SFX</span>
+      <label class="toggle-pill">
+        <input type="checkbox" class="switch" id="soundToggle">
+        <span>🔔 Sound</span>
       </label>
     </div>
 
+    <!-- Grid -->
     <main class="grid">
       <!-- 1. M5 Max MacBook Pro -->
-      <section class="card" data-type="soon">
-        <div class="inner">
-          <div class="face front">
-            <div class="rank r1"><span class="dot"></span>#1</div>
-            <h2>M5 Max MacBook Pro</h2>
-            <div class="art"><img src="https://static0.pocketlintimages.com/wordpress/wp-content/uploads/2025/10/apple-m5.jpg?w=1200&h=628&fit=crop" alt="M5 Max MacBook Pro"></div>
+      <article class="card" data-type="soon">
+        <div class="card-inner">
+          <div class="card-face card-front">
+            <div class="rank rank-1"><span class="rank-dot"></span>#1</div>
+            <h2 class="card-title">M5 Max MacBook Pro</h2>
+            <div class="image-wrap">
+              <img src="https://static0.pocketlintimages.com/wordpress/wp-content/uploads/2025/10/apple-m5.jpg?w=1200&h=628&fit=crop" alt="M5 Max MacBook Pro">
+            </div>
           </div>
-          <div class="face back">
-            <h2>M5 Max MacBook Pro</h2>
-            <div class="soon">🚀 Coming early 2026</div>
-            <div class="cta"><button class="btn" data-flip-back>⬅️ Flip back</button></div>
+          <div class="card-face card-back">
+            <h3 class="back-title">M5 Max MacBook Pro</h3>
+            <div class="coming-soon">🚀 Coming Early 2026</div>
+            <div class="btn-group">
+              <button class="btn" data-flip-back>← Go Back</button>
+            </div>
           </div>
         </div>
-      </section>
+      </article>
 
       <!-- 2. iPhone 17 Pro Max -->
-      <section class="card">
-        <div class="inner">
-          <div class="face front">
-            <div class="rank r2"><span class="dot"></span>#2</div>
-            <h2>iPhone 17 Pro Max 512 GB (Orange)</h2>
-            <div class="art"><img src="https://directunlocks.com/devices/compressed/iphone-17-pro.png?v=6" alt="iPhone 17 Pro Max"></div>
+      <article class="card" data-type="bundle">
+        <div class="card-inner">
+          <div class="card-face card-front">
+            <div class="rank rank-2"><span class="rank-dot"></span>#2</div>
+            <h2 class="card-title">iPhone 17 Pro Max 512GB</h2>
+            <div class="image-wrap">
+              <img src="https://directunlocks.com/devices/compressed/iphone-17-pro.png?v=6" alt="iPhone 17 Pro Max">
+            </div>
           </div>
-          <div class="face back">
-            <h2>iPhone 17 Pro Max</h2>
-            <div class="meta"><div class="price">$1,399.99</div></div>
-            <div class="cta">
-              <a class="btn" href="https://www.apple.com/shop/buy-iphone/iphone-17-pro/6.9-inch-display-512gb-cosmic-orange-att" target="_blank" rel="noopener">🛒 Buy Now</a>
-              <button class="btn" data-flip-back>⬅️ Back</button>
+          <div class="card-face card-back">
+            <h3 class="back-title">iPhone 17 Pro Max</h3>
+            <div class="price">$1,399.99</div>
+            <div class="btn-group">
+              <button class="btn btn-primary" data-open-phone-modal>🛒 Choose Option</button>
+              <button class="btn" data-flip-back>← Go Back</button>
             </div>
           </div>
         </div>
-      </section>
+      </article>
 
       <!-- 3. AirPods Pro 3 -->
-      <section class="card">
-        <div class="inner">
-          <div class="face front">
-            <div class="rank r3"><span class="dot"></span>#3</div>
-            <h2>AirPods Pro 3</h2>
-            <div class="art"><img src="https://www.att.com/scmsassets/global/accessories/audio/apple/airpods-pro-3/carousel/4391u-1.png" alt="AirPods Pro 3"></div>
+      <article class="card">
+        <div class="card-inner">
+          <div class="card-face card-front">
+            <div class="rank rank-3"><span class="rank-dot"></span>#3</div>
+            <h2 class="card-title">AirPods Pro 3</h2>
+            <div class="image-wrap">
+              <img src="https://www.att.com/scmsassets/global/accessories/audio/apple/airpods-pro-3/carousel/4391u-1.png" alt="AirPods Pro 3">
+            </div>
           </div>
-          <div class="face back">
-            <h2>AirPods Pro 3</h2>
-            <div class="meta"><div class="price">$249.00</div></div>
-            <div class="cta">
-              <a class="btn" href="https://www.apple.com/shop/buy-airpods/airpods-pro-3" target="_blank" rel="noopener">🛒 Buy Now</a>
-              <button class="btn" data-flip-back>⬅️ Back</button>
+          <div class="card-face card-back">
+            <h3 class="back-title">AirPods Pro 3</h3>
+            <div class="price">$249.00</div>
+            <div class="btn-group">
+              <a class="btn btn-primary" href="https://www.apple.com/shop/buy-airpods/airpods-pro-3" target="_blank" rel="noopener">🛒 Buy Now</a>
+              <button class="btn" data-flip-back>← Go Back</button>
             </div>
           </div>
         </div>
-      </section>
+      </article>
 
       <!-- 4. Monitor -->
-      <section class="card">
-        <div class="inner">
-          <div class="face front">
-            <div class="rank r4"><span class="dot"></span>#4</div>
-            <h2>27" 4K 144Hz Monitor</h2>
-            <div class="art"><img id="monImg" src="monitor.png" alt="27-inch 4K Monitor"></div>
+      <article class="card">
+        <div class="card-inner">
+          <div class="card-face card-front">
+            <div class="rank rank-4"><span class="rank-dot"></span>#4</div>
+            <h2 class="card-title">27" 4K 144Hz Monitor</h2>
+            <div class="image-wrap">
+              <img src="monitor.png" alt="27-inch 4K Monitor" onerror="this.parentElement.innerHTML='<div style=&quot;color:var(--muted);text-align:center;&quot;>📺 Monitor Image</div>'">
+            </div>
           </div>
-          <div class="face back">
-            <h2>27" 4K 144Hz Monitor</h2>
-            <div class="meta"><div class="price">$229.00</div></div>
-            <div class="cta">
-              <a class="btn" href="https://www.newegg.com/lxz-lx270zg-27-4k-uhd-144-hz-ips-black/p/3D4-008H-00005" target="_blank" rel="noopener">🛒 Buy Now</a>
-              <button class="btn" data-flip-back>⬅️ Back</button>
+          <div class="card-face card-back">
+            <h3 class="back-title">27" 4K 144Hz Monitor</h3>
+            <div class="price">$229.00</div>
+            <div class="btn-group">
+              <a class="btn btn-primary" href="https://www.newegg.com/lxz-lx270zg-27-4k-uhd-144-hz-ips-black/p/3D4-008H-00005" target="_blank" rel="noopener">🛒 Buy Now</a>
+              <button class="btn" data-flip-back>← Go Back</button>
             </div>
           </div>
         </div>
-      </section>
+      </article>
 
       <!-- 5. Webcam -->
-      <section class="card">
-        <div class="inner">
-          <div class="face front">
-            <div class="rank r5"><span class="dot"></span>#5</div>
-            <h2>Webcam</h2>
-            <div class="art"><img src="https://cdn.shopify.com/s/files/1/0054/9466/9382/files/c606a6b460f944b4a834.webp?v=1725464276" alt="Webcam"></div>
+      <article class="card">
+        <div class="card-inner">
+          <div class="card-face card-front">
+            <div class="rank rank-5"><span class="rank-dot"></span>#5</div>
+            <h2 class="card-title">Webcam</h2>
+            <div class="image-wrap">
+              <img src="https://cdn.shopify.com/s/files/1/0054/9466/9382/files/c606a6b460f944b4a834.webp?v=1725464276" alt="Webcam">
+            </div>
           </div>
-          <div class="face back">
-            <h2>Webcam</h2>
-            <div class="meta"><div class="price">$129.00</div></div>
-            <div class="cta">
-              <a class="btn" href="https://a.co/d/e9CLvcx" target="_blank" rel="noopener">🛒 Buy Now</a>
-              <button class="btn" data-flip-back>⬅️ Back</button>
+          <div class="card-face card-back">
+            <h3 class="back-title">Webcam</h3>
+            <div class="price">$129.00</div>
+            <div class="btn-group">
+              <a class="btn btn-primary" href="https://a.co/d/e9CLvcx" target="_blank" rel="noopener">🛒 Buy Now</a>
+              <button class="btn" data-flip-back>← Go Back</button>
             </div>
           </div>
         </div>
-      </section>
+      </article>
 
       <!-- 6. Eilish Perfume -->
-      <section class="card">
-        <div class="inner">
-          <div class="face front">
-            <div class="rank r6"><span class="dot"></span>#6</div>
-            <h2>Eilish No.2 Mini Duo Gift Set</h2>
-            <div class="art"><img src="https://media.ulta.com/i/ulta/2616165?w=400&h=400&fmt=auto" alt="Eilish perfume"></div>
+      <article class="card">
+        <div class="card-inner">
+          <div class="card-face card-front">
+            <div class="rank rank-6"><span class="rank-dot"></span>#6</div>
+            <h2 class="card-title">Eilish No.2 Mini Duo</h2>
+            <div class="image-wrap">
+              <img src="https://media.ulta.com/i/ulta/2616165?w=400&h=400&fmt=auto" alt="Eilish Perfume">
+            </div>
           </div>
-          <div class="face back">
-            <h2>Eilish No.2 Mini Duo</h2>
-            <div class="meta"><div class="price">$24.00</div></div>
-            <div class="cta">
-              <a class="btn" href="https://www.ulta.com/p/eilish-eilish-no-2-mini-duo-gift-set-pimprod2041690" target="_blank" rel="noopener">🛒 Buy Now</a>
-              <button class="btn" data-flip-back>⬅️ Back</button>
+          <div class="card-face card-back">
+            <h3 class="back-title">Eilish No.2 Mini Duo</h3>
+            <div class="price">$24.00</div>
+            <div class="btn-group">
+              <a class="btn btn-primary" href="https://www.ulta.com/p/eilish-eilish-no-2-mini-duo-gift-set-pimprod2041690" target="_blank" rel="noopener">🛒 Buy Now</a>
+              <button class="btn" data-flip-back>← Go Back</button>
             </div>
           </div>
         </div>
-      </section>
+      </article>
 
       <!-- 7. Alani Nu -->
-      <section class="card" data-type="multi">
-        <div class="inner">
-          <div class="face front">
-            <div class="rank r7"><span class="dot"></span>#7</div>
-            <h2>Alani Nu Energy Drink (18-ct)</h2>
-            <div class="art"><img src="https://bfasset.costco-static.com/U447IH35/as/xfv98tr9k7gxpz7x3s24kkm/1942590__2?auto=webp&format=jpg&width=600&height=600&fit=bounds&canvas=600,600" alt="Alani Nu"></div>
+      <article class="card" data-type="multi">
+        <div class="card-inner">
+          <div class="card-face card-front">
+            <div class="rank rank-7"><span class="rank-dot"></span>#7</div>
+            <h2 class="card-title">Alani Nu Energy (18-ct)</h2>
+            <div class="image-wrap">
+              <img src="https://bfasset.costco-static.com/U447IH35/as/xfv98tr9k7gxpz7x3s24kkm/1942590__2?auto=webp&format=jpg&width=600&height=600&fit=bounds&canvas=600,600" alt="Alani Nu">
+            </div>
           </div>
-          <div class="face back">
-            <h2>Alani Nu Energy (18-ct)</h2>
-            <div class="meta"><div class="price">$27.00</div></div>
-            <div class="cta">
-              <button class="btn" data-open-retailer>🏪 Choose Store</button>
-              <button class="btn" data-flip-back>⬅️ Back</button>
+          <div class="card-face card-back">
+            <h3 class="back-title">Alani Nu Energy</h3>
+            <div class="price">$27.00</div>
+            <div class="btn-group">
+              <button class="btn btn-primary" data-open-store-modal>🏪 Choose Store</button>
+              <button class="btn" data-flip-back>← Go Back</button>
             </div>
           </div>
         </div>
-      </section>
+      </article>
 
       <!-- 8. SSD -->
-      <section class="card">
-        <div class="inner">
-          <div class="face front">
-            <div class="rank r8"><span class="dot"></span>#8</div>
-            <h2>Team Group MP33 2TB NVMe SSD</h2>
-            <div class="art"><img src="https://c1.neweggimages.com/productimage/nb1280/20-331-431-01.jpg" alt="Team Group SSD"></div>
+      <article class="card">
+        <div class="card-inner">
+          <div class="card-face card-front">
+            <div class="rank rank-8"><span class="rank-dot"></span>#8</div>
+            <h2 class="card-title">Team Group 2TB NVMe SSD</h2>
+            <div class="image-wrap">
+              <img src="https://c1.neweggimages.com/productimage/nb1280/20-331-431-01.jpg" alt="Team Group SSD">
+            </div>
           </div>
-          <div class="face back">
-            <h2>Team Group MP33 2TB SSD</h2>
-            <div class="meta"><div class="price">$113.99</div></div>
-            <div class="cta">
-              <a class="btn" href="https://www.newegg.com/team-group-2tb-mp33-nvme-1-3/p/N82E16820331431" target="_blank" rel="noopener">🛒 Buy Now</a>
-              <button class="btn" data-flip-back>⬅️ Back</button>
+          <div class="card-face card-back">
+            <h3 class="back-title">Team Group 2TB SSD</h3>
+            <div class="price">$113.99</div>
+            <div class="btn-group">
+              <a class="btn btn-primary" href="https://www.newegg.com/team-group-2tb-mp33-nvme-1-3/p/N82E16820331431" target="_blank" rel="noopener">🛒 Buy Now</a>
+              <button class="btn" data-flip-back>← Go Back</button>
             </div>
           </div>
         </div>
-      </section>
+      </article>
 
-      <!-- 9. NEW: Opera Haus Hoodie -->
-      <section class="card">
-        <div class="inner">
-          <div class="face front">
-            <div class="rank r9"><span class="dot"></span>#9</div>
-            <h2>Lady Gaga Opera Haus Hoodie (2XL)</h2>
-            <div class="art">
-              <div class="hoodie-container">
-                <img class="hoodie-img hoodie-front" src="hoodie-front-trans.png" alt="Opera Haus Hoodie Front" onerror="this.src='https://raw.githubusercontent.com/yourusername/yourrepo/main/hoodie-front-trans.png'">
-                <img class="hoodie-img hoodie-back" src="hoodie-back-trans.png" alt="Opera Haus Hoodie Back" onerror="this.src='https://raw.githubusercontent.com/yourusername/yourrepo/main/hoodie-back-trans.png'">
+      <!-- 9. Opera Haus Hoodie -->
+      <article class="card">
+        <div class="card-inner">
+          <div class="card-face card-front">
+            <div class="rank rank-9"><span class="rank-dot"></span>#9</div>
+            <h2 class="card-title">Lady Gaga Opera Haus Hoodie</h2>
+            <div class="image-wrap">
+              <div class="hoodie-wrap">
+                <img class="hoodie-front" src="hoodie-front-trans.png" alt="Hoodie Front" onerror="this.style.display='none'">
+                <img class="hoodie-back" src="hoodie-back-trans.png" alt="Hoodie Back" onerror="this.style.display='none'">
               </div>
             </div>
           </div>
-          <div class="face back">
-            <h2>Opera Haus Hoodie (2XL)</h2>
-            <div class="meta"><div class="price">$125.00</div></div>
-            <div class="cta">
-              <a class="btn" href="https://www.ladygaga.com/us-en/shop/products/opera-haus-hoodie?Size=2XL" target="_blank" rel="noopener">🛒 Buy Now</a>
-              <button class="btn" data-flip-back>⬅️ Back</button>
+          <div class="card-face card-back">
+            <h3 class="back-title">Opera Haus Hoodie (2XL)</h3>
+            <div class="price">$125.00</div>
+            <div class="btn-group">
+              <a class="btn btn-primary" href="https://www.ladygaga.com/us-en/shop/products/opera-haus-hoodie?Size=2XL" target="_blank" rel="noopener">🛒 Buy Now</a>
+              <button class="btn" data-flip-back>← Go Back</button>
             </div>
           </div>
         </div>
-      </section>
+      </article>
     </main>
 
-    <footer>Made with ❤️ for Christmas 2025 • No tracking • Tap cards to flip!</footer>
+    <footer>Made with ❤️ for Christmas 2025</footer>
   </div>
 
-  <!-- Retailer modal -->
-  <div class="modal" id="retailerModal">
-    <div class="sheet">
-      <h3>🏪 Choose Your Store</h3>
-      <div class="row">
-        <a class="btn" href="https://www.costco.com/p/-/alani-nu-energy-drink-variety-pack-12-fl-oz-18-count/4000269836?langId=-1" target="_blank" rel="noopener">Costco</a>
-        <a class="btn" href="https://www.samsclub.com/ip/alani-nu-energy-drink-variety-pack-12-fl-oz-18pk/15230853923?itemNumber=990386544" target="_blank" rel="noopener">Sam's Club</a>
+  <!-- Hint -->
+  <div class="hint" id="hint">👆 Tap cards to flip • Hover hoodie for back</div>
+
+  <!-- Phone Modal -->
+  <div class="modal" id="phoneModal">
+    <div class="modal-content">
+      <h3 class="modal-title">📱 iPhone 17 Pro Max</h3>
+      <div class="modal-btns">
+        <a class="btn btn-primary" href="https://www.apple.com/shop/buy-iphone/iphone-17-pro/6.9-inch-display-512gb-cosmic-orange-att" target="_blank" rel="noopener">
+          📱 Phone Only — $1,399.99
+        </a>
+        <a class="btn" href="https://www.amazon.com/Spigen-Covered-Control-Anti-Yellowing-Compatible/dp/B0FD1TT96X?crid=1HYZ6LSU363W7&dib=eyJ2IjoiMSJ9.Cv-58L-0qP0saRa4q5ovqk80rIjUiUUifysxNMG5m-ob-33DY2DezbU5IuOL6gDGSYwsUgWzZdlEveuE1BRzknZgFoqSPWdUnpALMzUqKiasbobujiu4D8Qe1bkvxUNFs0S4No_LtL62aO62ZXpUj1pXJKLkQ_hkWzdYLwmpXWLNGzglpEJ4eP5KTXRC5AWB.RKKQklMsZuBqC4DqCzpIgbbsJ6xbcECQhPYbS1Tfdds&dib_tag=se&keywords=iphone%2B17%2Bpro%2Bmax%2Bcase&qid=1764535968&sprefix=iphone%2B17%2Bpro%2Bmax%2Bcas%2Caps%2C176&sr=8-19&xpid=ent8IuI0bciRJ&th=1" target="_blank" rel="noopener">
+          🛡️ Spigen Case — $12.00
+        </a>
+        <button class="btn modal-close" data-close-modal>Close</button>
       </div>
-      <button class="btn close" data-close-modal>Close</button>
     </div>
   </div>
 
-  <div class="hint" id="hint">👆 Tap a card to flip it! • Hover hoodie to see back!</div>
+  <!-- Store Modal -->
+  <div class="modal" id="storeModal">
+    <div class="modal-content">
+      <h3 class="modal-title">🏪 Choose Your Store</h3>
+      <div class="modal-btns">
+        <a class="btn btn-primary" href="https://www.costco.com/p/-/alani-nu-energy-drink-variety-pack-12-fl-oz-18-count/4000269836?langId=-1" target="_blank" rel="noopener">
+          Costco
+        </a>
+        <a class="btn" href="https://www.samsclub.com/ip/alani-nu-energy-drink-variety-pack-12-fl-oz-18pk/15230853923?itemNumber=990386544" target="_blank" rel="noopener">
+          Sam's Club
+        </a>
+        <button class="btn modal-close" data-close-modal>Close</button>
+      </div>
+    </div>
+  </div>
 
   <script>
-    // Christmas Countdown
-    function updateCountdown(){
+    // Countdown
+    function updateCountdown() {
       const xmas = new Date('2025-12-25T00:00:00');
       const now = new Date();
       const diff = xmas - now;
-      if(diff <= 0){ document.getElementById('countdown').textContent = "🎉 IT'S CHRISTMAS! 🎄"; return; }
-      const days = Math.floor(diff / (1000*60*60*24));
-      const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
-      const mins = Math.floor((diff % (1000*60*60)) / (1000*60));
-      const secs = Math.floor((diff % (1000*60)) / 1000);
+      
+      if (diff <= 0) {
+        document.getElementById('countdown').textContent = "🎉 Merry Christmas! 🎄";
+        return;
+      }
+      
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const secs = Math.floor((diff % (1000 * 60)) / 1000);
+      
       document.getElementById('countdown').textContent = `${days}d ${hours}h ${mins}m ${secs}s`;
     }
-    updateCountdown(); setInterval(updateCountdown, 1000);
-
-    // Sparkle follows cursor
-    const sparkle = document.querySelector('.sparkle');
-    function setSparkle(x, y){ sparkle.style.setProperty('--x', x+'px'); sparkle.style.setProperty('--y', y+'px'); }
-    function moveSparkle(e){ const x = e.touches ? e.touches[0].clientX : e.clientX; const y = e.touches ? e.touches[0].clientY : e.clientY; setSparkle(x,y); }
-    document.addEventListener('pointermove', moveSparkle, {passive:true});
-    document.addEventListener('touchmove', moveSparkle, {passive:true});
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
 
     // Snow
-    const snowWrap = document.getElementById('snow');
+    const snowContainer = document.getElementById('snow');
     const snowToggle = document.getElementById('snowToggle');
-    function makeSnow(){
-      snowWrap.innerHTML = '';
-      const count = 90, W = window.innerWidth;
-      for(let i=0;i<count;i++){
-        const f = document.createElement('span'); f.className = 'flake';
-        const size = Math.random()*2.4+1.1, left = Math.random()*W, delay = Math.random()*6, dur = Math.random()*10+9;
-        const drift = (Math.random()*140-70)+'px';
-        Object.assign(f.style, {width:size+'px', height:size+'px', left:left+'px', animationDuration:dur+'s', animationDelay:delay+'s'});
-        f.style.setProperty('--drift', drift); snowWrap.appendChild(f);
+    
+    function createSnow() {
+      snowContainer.innerHTML = '';
+      const count = Math.min(60, Math.floor(window.innerWidth / 15));
+      
+      for (let i = 0; i < count; i++) {
+        const flake = document.createElement('span');
+        flake.className = 'flake';
+        const size = Math.random() * 3 + 2;
+        flake.style.width = size + 'px';
+        flake.style.height = size + 'px';
+        flake.style.left = Math.random() * 100 + '%';
+        flake.style.animationDuration = (Math.random() * 8 + 8) + 's';
+        flake.style.animationDelay = Math.random() * 5 + 's';
+        flake.style.setProperty('--drift', (Math.random() * 100 - 50) + 'px');
+        snowContainer.appendChild(flake);
       }
     }
-    function toggleSnow(){ snowWrap.style.display = snowToggle.checked ? 'block' : 'none'; }
-    makeSnow(); toggleSnow(); window.addEventListener('resize', makeSnow); snowToggle.addEventListener('change', toggleSnow);
+    
+    function toggleSnow() {
+      snowContainer.style.display = snowToggle.checked ? 'block' : 'none';
+    }
+    
+    createSnow();
+    toggleSnow();
+    window.addEventListener('resize', createSnow);
+    snowToggle.addEventListener('change', toggleSnow);
 
-    // Confetti burst
-    const confettiWrap = document.getElementById('confetti');
-    const colors = ['#ff3355','#15e18c','#ffd463','#7aa6ff','#b07bff','#68e8ff','#ff87c5','#ff6b9d'];
-    function makeConfetti(x,y){
-      for(let i=0;i<25;i++){
-        const c = document.createElement('div'); c.className = 'confetto';
-        c.style.left = x+'px'; c.style.top = y+'px';
-        c.style.background = colors[Math.floor(Math.random()*colors.length)];
-        const drift = (Math.random()*300-150)+'px';
-        const delay = Math.random()*0.1;
-        c.style.setProperty('--drift', drift);
-        c.style.animationDelay = delay+'s';
-        confettiWrap.appendChild(c);
-        setTimeout(()=>c.remove(), 2100);
-      }
+    // Sparkle/Glow
+    const sparkle = document.getElementById('sparkle');
+    const glowToggle = document.getElementById('glowToggle');
+    const ambient = document.querySelector('.ambient');
+    
+    function moveSparkle(e) {
+      const x = e.touches ? e.touches[0].clientX : e.clientX;
+      const y = e.touches ? e.touches[0].clientY : e.clientY;
+      sparkle.style.setProperty('--x', x + 'px');
+      sparkle.style.setProperty('--y', y + 'px');
     }
+    
+    function toggleGlow() {
+      sparkle.style.display = glowToggle.checked ? 'block' : 'none';
+      ambient.style.display = glowToggle.checked ? 'block' : 'none';
+    }
+    
+    document.addEventListener('pointermove', moveSparkle, { passive: true });
+    glowToggle.addEventListener('change', toggleGlow);
+    toggleGlow();
 
     // Sound
-    const soundToggle = document.getElementById('soundToggle'); let audioCtx=null;
-    function playChime(){ 
-      if(!soundToggle.checked) return; 
-      if(!audioCtx) audioCtx = new (window.AudioContext||window.webkitAudioContext)(); 
-      const now=audioCtx.currentTime; 
-      const o=audioCtx.createOscillator(), g=audioCtx.createGain(); 
-      o.type='sine'; o.frequency.setValueAtTime(880,now); 
-      g.gain.setValueAtTime(0.001,now); 
-      g.gain.exponentialRampToValueAtTime(0.12,now+0.02); 
-      g.gain.exponentialRampToValueAtTime(0.0001,now+0.35); 
-      o.connect(g).connect(audioCtx.destination); o.start(); o.stop(now+0.36); 
-      const o2=audioCtx.createOscillator(), g2=audioCtx.createGain(); 
-      o2.type='sine'; o2.frequency.setValueAtTime(1175,now+0.05); 
-      g2.gain.setValueAtTime(0.001,now+0.05); 
-      g2.gain.exponentialRampToValueAtTime(0.12,now+0.08); 
-      g2.gain.exponentialRampToValueAtTime(0.0001,now+0.42); 
-      o2.connect(g2).connect(audioCtx.destination); o2.start(now+0.05); o2.stop(now+0.45); 
+    const soundToggle = document.getElementById('soundToggle');
+    let audioCtx = null;
+    
+    function playChime() {
+      if (!soundToggle.checked) return;
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      
+      const now = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(880, now);
+      gain.gain.setValueAtTime(0.001, now);
+      gain.gain.exponentialRampToValueAtTime(0.1, now + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+      
+      osc.connect(gain).connect(audioCtx.destination);
+      osc.start();
+      osc.stop(now + 0.35);
+    }
+
+    // Confetti
+    const confettiContainer = document.getElementById('confetti');
+    const colors = ['#ff4466', '#22e8a0', '#ffc857', '#6eb5ff', '#c084fc', '#22d3ee', '#ff6b9d'];
+    
+    function burstConfetti(x, y) {
+      for (let i = 0; i < 20; i++) {
+        const confetto = document.createElement('div');
+        confetto.className = 'confetto';
+        confetto.style.left = x + 'px';
+        confetto.style.top = y + 'px';
+        confetto.style.background = colors[Math.floor(Math.random() * colors.length)];
+        confetto.style.setProperty('--drift', (Math.random() * 200 - 100) + 'px');
+        confetto.style.animationDelay = (Math.random() * 0.1) + 's';
+        confettiContainer.appendChild(confetto);
+        setTimeout(() => confetto.remove(), 2100);
+      }
     }
 
     // Card flipping
-    document.querySelectorAll('.card').forEach(card=>{
-      const flipBackBtns = card.querySelectorAll('[data-flip-back]');
-      card.addEventListener('click', e=>{
-        if(e.target.closest('a')) return;
-        if(e.target.closest('[data-flip-back]')) return;
-        if(e.target.closest('[data-open-retailer]')) return;
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('click', e => {
+        if (e.target.closest('a')) return;
+        if (e.target.closest('[data-flip-back]')) return;
+        if (e.target.closest('[data-open-phone-modal]')) return;
+        if (e.target.closest('[data-open-store-modal]')) return;
+        
         card.classList.toggle('flipped');
         playChime();
-        if(card.classList.contains('flipped')){
+        
+        if (card.classList.contains('flipped')) {
           const rect = card.getBoundingClientRect();
-          makeConfetti(rect.left + rect.width/2, rect.top + rect.height/2);
+          burstConfetti(rect.left + rect.width / 2, rect.top + rect.height / 2);
         }
+        
         hideHint();
       });
-      flipBackBtns.forEach(b=> b.addEventListener('click', e=>{ e.stopPropagation(); card.classList.remove('flipped'); }));
+      
+      card.querySelectorAll('[data-flip-back]').forEach(btn => {
+        btn.addEventListener('click', e => {
+          e.stopPropagation();
+          card.classList.remove('flipped');
+        });
+      });
     });
 
-    // Glow toggle - controls sparkle cursor effect and background glow
-    const sparkleToggle = document.getElementById('sparkleToggle');
-    const bgFloat = document.querySelector('.bgfloat');
-    function toggleSparkle(){ 
-      sparkle.style.display = sparkleToggle.checked ? 'block' : 'none';
-      bgFloat.style.display = sparkleToggle.checked ? 'block' : 'none';
-      // Update body background when glow is toggled
-      if(!sparkleToggle.checked) {
-        document.body.style.background = '#0a0c10'; // Clean dark background
-      } else {
-        // Reset to original gradient
-        document.body.style.background = 
-          'radial-gradient(1200px 800px at 100% -10%, rgba(255,51,85,.16), transparent 40%), ' +
-          'radial-gradient(1000px 700px at 0% 110%, rgba(21,225,140,.14), transparent 40%), ' +
-          'linear-gradient(180deg, #0c0f15, #07090c)';
+    // Modals
+    const phoneModal = document.getElementById('phoneModal');
+    const storeModal = document.getElementById('storeModal');
+    
+    document.addEventListener('click', e => {
+      if (e.target.closest('[data-open-phone-modal]')) {
+        e.stopPropagation();
+        phoneModal.classList.add('open');
+      }
+      if (e.target.closest('[data-open-store-modal]')) {
+        e.stopPropagation();
+        storeModal.classList.add('open');
+      }
+      if (e.target.closest('[data-close-modal]') || e.target.classList.contains('modal')) {
+        phoneModal.classList.remove('open');
+        storeModal.classList.remove('open');
+      }
+    });
+
+    // Hint
+    const hint = document.getElementById('hint');
+    function hideHint() {
+      if (hint) {
+        hint.style.opacity = '0';
+        hint.style.transition = 'opacity 0.3s';
+        setTimeout(() => hint.remove(), 300);
       }
     }
-    sparkleToggle.addEventListener('change', toggleSparkle); toggleSparkle();
-
-    // Modal
-    const retailerModal = document.getElementById('retailerModal');
-    document.addEventListener('click', (e)=>{
-      const openBtn = e.target.closest('[data-open-retailer]');
-      const closeBtn = e.target.closest('[data-close-modal]');
-      if(openBtn){ e.stopPropagation(); retailerModal.classList.add('open'); }
-      if(closeBtn || (e.target === retailerModal)){ retailerModal.classList.remove('open'); }
-    });
-
-    // Monitor fallback
-    document.addEventListener('DOMContentLoaded', ()=>{
-      const monImg = document.getElementById('monImg');
-      if(!monImg) return;
-      const fallbacks = ['monitor.png', 'image-removebg-preview (2).png'];
-      let i = 0;
-      const tryNext = ()=>{
-        if(i >= fallbacks.length){
-          const ph = document.createElement('div'); ph.className = 'ph'; ph.textContent = 'Image unavailable';
-          monImg.replaceWith(ph); return;
-        }
-        monImg.src = fallbacks[i++];
-      };
-      monImg.onerror = tryNext; if(!monImg.complete || monImg.naturalWidth === 0) tryNext();
-    });
-
-    // Hide hint
-    const hint = document.getElementById('hint');
-    function hideHint(){ if(hint){ hint.style.opacity='0'; setTimeout(()=>hint.remove(), 500); } }
-    setTimeout(hideHint, 7000);
+    setTimeout(hideHint, 6000);
   </script>
 </body>
 </html>
